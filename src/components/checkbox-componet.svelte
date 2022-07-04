@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { createEventDispatcher, onMount } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+    onMount(()  => dispatch('contador', 1))
 	export let data: any;
 </script>
 <!-- <div class="m-7"> -->
