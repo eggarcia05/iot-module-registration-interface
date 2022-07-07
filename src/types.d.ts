@@ -1,7 +1,7 @@
 interface Entidad {
 	id: string;
 	nombre: string;
-	tag: string;
+	tipo: string;
 }
 
 interface Etiqueta {

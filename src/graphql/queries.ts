@@ -1,7 +1,7 @@
 import { entidades } from './query/entidades-query';
-import { tags } from './query/tags-entidades-query';
+import { etiquetas } from './query/etiquetas';
 
 export const queries: any = {
 	entidades,
-	tags,
+	etiquetas,
 };

@@ -5,7 +5,7 @@ export const entidades = gql`
 		entidades {
             id
 			nombre
-			tag
+			tipo
 		}
 	}
 `;

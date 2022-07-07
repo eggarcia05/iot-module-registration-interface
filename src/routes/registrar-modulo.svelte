@@ -1,9 +1,9 @@
 <script lang="ts">
-	import CheckboxComponet from '../components/checkbox-componet.svelte';
 	import { onMount } from 'svelte';
-	import EquipoForm from '../components/PuntoForm.svelte';
+	import EquipoForm from '../components/EquipoForm.svelte';
 	import PuntoForm from '../components/PuntoForm.svelte';
 	import SitioForm from '../components/SitioForm.svelte';
+	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad'
 
 	let entidadSeleccionada: Entidad;
 	let etiquetas: Etiqueta[] | null;
@@ -27,12 +27,16 @@
 		}
 	}
 
+	const construirNuevaEntidad = async (): Promise<void> => {
+		$NUEVA_ENTIDAD['tags'][entidadSeleccionada.tipo] = true
+	}
+
 	const getEtiquetas = async (): Promise<any> => {
 		etiquetas = null;
 		const variables = {
 			entidad_id: entidadSeleccionada.id
 		};
-		const res = await fetch(`/api/queries-fetcher`, buildRequest('tags', variables));
+		const res = await fetch(`/api/queries-fetcher`, buildRequest('etiquetas', variables));
 		const response = await res.json();
 
 		etiquetas = response?.etiquetas ?? [];
@@ -43,6 +47,16 @@
 		const response = await res.json();
 
 		return response?.entidades ?? [];
+	};
+	
+	const guardarEntidad = async (): Promise<any> => {
+		const query = entidadSeleccionada.tipo;
+		const variables = {object: $NUEVA_ENTIDAD};
+		const res = await fetch(`/api/mutations-fetcher`, buildRequest(query, variables));
+		const response = await res.json();
+		console.log(response);
+
+		return response;
 	};
 
 	onMount(async () => {
@@ -68,6 +82,7 @@
 								class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-state"
 								bind:value={entidadSeleccionada}
+								on:change={construirNuevaEntidad}
 							>
 								<option value={{}}>Seleccione un tipo de Entidad</option>
 								{#await getEntidades()}
@@ -94,11 +109,11 @@
 					</div>
 				</div>
 				{#if etiquetas}
-					{#if entidadSeleccionada.tag === 'equip'}
+					{#if entidadSeleccionada.tipo === 'equip'}
 						<EquipoForm {etiquetas} />
-					{:else if entidadSeleccionada.tag === 'site'}
+					{:else if entidadSeleccionada.tipo === 'site'}
 						<SitioForm {etiquetas} />
-					{:else if entidadSeleccionada.tag === 'point'}
+					{:else if entidadSeleccionada.tipo === 'point'}
 						<PuntoForm {etiquetas} />
 					{/if}
 				{/if}
@@ -106,7 +121,7 @@
 					<button
 						type="button"
 						class="inline-block px-7 py-3 bg-slate-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-stone-500 hover:shadow-lg ease-in-out"
-						on:click={() => alert('SAVED')}
+						on:click={guardarEntidad}
 					>
 						Guardar
 					</button>
