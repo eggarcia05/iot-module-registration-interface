@@ -9,13 +9,11 @@
 	const construirNuevaEntidad = async (event: any): Promise<void> => {
 		const tag = event.target.id;
 		const valor = event.target.value;
-		const entidadBorrador: any = {}
 
 		if(Object.keys($NUEVA_ENTIDAD).includes(tag))
 			$NUEVA_ENTIDAD[tag] = valor;
 		
 		$NUEVA_ENTIDAD['tags'][tag] = valor;
-		console.log($NUEVA_ENTIDAD);
 		
 	};
 

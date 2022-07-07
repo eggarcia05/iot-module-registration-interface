@@ -3,6 +3,7 @@
 	import EquipoForm from '../components/EquipoForm.svelte';
 	import PuntoForm from '../components/PuntoForm.svelte';
 	import SitioForm from '../components/SitioForm.svelte';
+	import { buildRequest } from '../utils/helper-functions';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad'
 
 	let entidadSeleccionada: Entidad;
@@ -11,15 +12,7 @@
 	$: etiquetas = null;
 	$: url = '';
 
-	const buildRequest = (query: string, variables: any = {}): RequestInit => {
-		return {
-			method: 'POST',
-			body: JSON.stringify({
-				query,
-				variables
-			})
-		};
-	};
+	
 
 	$: {
 		if (entidadSeleccionada?.id) {

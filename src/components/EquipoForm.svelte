@@ -1,22 +1,23 @@
 <script lang="ts">
 	import CheckboxComponet from './checkbox-componet.svelte';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
+	import Autocomplete from './Autocomplete.svelte';
+	import { identity } from 'svelte/internal';
 
 	export let etiquetas: Etiqueta[];
 	let url = '';
 	$: cont = 0;
 
+	console.log(etiquetas);
+
 	const construirNuevaEntidad = async (event: any): Promise<void> => {
 		const tag = event.target.id;
 		const valor = event.target.value;
-		const entidadBorrador: any = {}
 
-		if(Object.keys($NUEVA_ENTIDAD).includes(tag))
-			$NUEVA_ENTIDAD[tag] = valor;
-		
+		if (Object.keys($NUEVA_ENTIDAD).includes(tag)) $NUEVA_ENTIDAD[tag] = valor;
+
 		$NUEVA_ENTIDAD['tags'][tag] = valor;
 		console.log($NUEVA_ENTIDAD);
-		
 	};
 
 	const handleContador = (event: any) => (cont += event.detail);
@@ -29,7 +30,7 @@
 				<div class="grid grid-cols-2 gap-4">
 					{#each etiquetas as etiqueta}
 						{#if etiqueta.nombre && etiqueta.requerido !== false}
-							<div class="noRef">
+							<div class="noRef ">
 								<label
 									class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 									for="grid-last-name"
@@ -37,13 +38,17 @@
 									{etiqueta.nombre}
 									{etiqueta.requerido ? ' *' : ''}
 								</label>
-								<input
-									class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-									id={etiqueta.tag}
-									type="text"
-									on:keyup={construirNuevaEntidad}
-									placeholder={etiqueta.descripcion}
-								/>
+								{#if etiqueta.tag.includes('Ref')}
+									<Autocomplete tipoEntidad={etiqueta.tag} />
+								{:else}
+									<input
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id={etiqueta.tag}
+										type="text"
+										on:keyup={construirNuevaEntidad}
+										placeholder={etiqueta.descripcion}
+									/>
+								{/if}
 							</div>
 						{/if}
 					{/each}

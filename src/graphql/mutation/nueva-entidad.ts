@@ -10,3 +10,14 @@ export const site = gql`
 		}
 	}
 `;
+
+export const equip = gql`
+	mutation nuevaEntidad($object: [equip_insert_input!] = {}) {
+		insert_equip(
+			objects: $object
+			on_conflict: { constraint: equip_pk, update_columns: [dis, tags, siteRef, updated_at] }
+		) {
+			affected_rows
+		}
+	}
+`;
