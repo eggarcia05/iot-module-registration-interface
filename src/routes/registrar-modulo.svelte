@@ -28,7 +28,9 @@
 	}
 
 	const construirNuevaEntidad = async (): Promise<void> => {
-		$NUEVA_ENTIDAD['tags'][entidadSeleccionada.tipo] = true
+		NUEVA_ENTIDAD.clear()
+		console.log($NUEVA_ENTIDAD);
+		
 	}
 
 	const getEtiquetas = async (): Promise<any> => {
