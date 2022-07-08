@@ -1,8 +1,7 @@
 <script lang="ts">
 	import CheckboxComponet from './checkbox-componet.svelte';
-	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
+ 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 	import Autocomplete from './Autocomplete.svelte';
-	import { identity } from 'svelte/internal';
 
 	export let etiquetas: Etiqueta[];
 	let url = '';

@@ -1,6 +1,7 @@
-import { site, equip } from './mutation/nueva-entidad';
+import { site, equip, point} from './mutation/nueva-entidad';
 
 export const queries: any = {
 	site,
-	equip
+	equip,
+	point
 };

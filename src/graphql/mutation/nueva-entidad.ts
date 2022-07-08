@@ -21,3 +21,19 @@ export const equip = gql`
 		}
 	}
 `;
+
+export const point = gql`
+	mutation nuevaEntidad($object: [point_insert_input!] = {}) {
+		insert_point(
+			objects: $object
+			on_conflict: {
+				constraint: point_pk
+				update_columns: [dis, tags, siteRef, equipRef, updated_at]
+			}
+		) {
+			returning{
+				id
+			}
+		}
+	}
+`;

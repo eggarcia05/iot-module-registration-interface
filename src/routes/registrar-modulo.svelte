@@ -3,16 +3,13 @@
 	import EquipoForm from '../components/EquipoForm.svelte';
 	import PuntoForm from '../components/PuntoForm.svelte';
 	import SitioForm from '../components/SitioForm.svelte';
-	import { buildRequest } from '../utils/helper-functions';
+	import { buildRequest, deleteNullProperties } from '../utils/helper-functions';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad'
 
 	let entidadSeleccionada: Entidad;
 	let etiquetas: Etiqueta[] | null;
 
 	$: etiquetas = null;
-	$: url = '';
-
-	
 
 	$: {
 		if (entidadSeleccionada?.id) {
@@ -20,10 +17,11 @@
 		}
 	}
 
+	$: {
+		console.log($NUEVA_ENTIDAD)
+	}
 	const construirNuevaEntidad = async (): Promise<void> => {
-		NUEVA_ENTIDAD.clear()
-		console.log($NUEVA_ENTIDAD);
-		
+		NUEVA_ENTIDAD.clear()		
 	}
 
 	const getEtiquetas = async (): Promise<any> => {
@@ -44,12 +42,27 @@
 		return response?.entidades ?? [];
 	};
 	
-	const guardarEntidad = async (): Promise<any> => {
+	const fetchMutation = async (): Promise<any> => {
 		const query = entidadSeleccionada.tipo;
 		const variables = {object: $NUEVA_ENTIDAD};
 		const res = await fetch(`/api/mutations-fetcher`, buildRequest(query, variables));
-		const response = await res.json();
-		console.log(response);
+		return await res.json();
+	}
+
+	const guardarEntidad = async (): Promise<any> => {
+		$NUEVA_ENTIDAD = deleteNullProperties($NUEVA_ENTIDAD)
+		const query = entidadSeleccionada.tipo;
+		const response = await fetchMutation();
+	
+		const idGenerado = response?.[`insert_${query}`]?.
+								returning?.[0].id ?? null;
+
+		if( idGenerado ){
+			$NUEVA_ENTIDAD['id'] = idGenerado;
+			$NUEVA_ENTIDAD['tags']['id'] = idGenerado;
+			const response = await fetchMutation();
+			return response;
+		}
 
 		return response;
 	};

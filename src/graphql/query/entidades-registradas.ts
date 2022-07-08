@@ -8,3 +8,21 @@ export const site = gql`
 		}
 	}
 `;
+
+export const equip = gql`
+	query equips {
+		equip {
+			id
+			dis
+		}
+	}
+`;
+
+export const point = gql`
+	query points {
+		point {
+			id
+			dis
+		}
+	}
+`;
