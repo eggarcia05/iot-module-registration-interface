@@ -19,3 +19,25 @@ export const deleteNullProperties = (nuevaEntidad: any) => {
 
 	return nuevaEntidad;
 };
+
+export const filtrarLista = (searchText: string, listToFilter: Haystack[]) => {
+	const searchWordList = searchText.split(' ');
+	const filterList = [];
+
+	for (let row of listToFilter) {
+		let matched = true;
+		const { tag, descripcion } = row;
+		for (let searchWord of searchWordList) {
+			if (
+				!(
+					tag.toLowerCase().includes(searchWord.toLowerCase()) ||
+					descripcion.toLowerCase().includes(searchWord.toLowerCase())
+				)
+			)
+				matched = false;
+		}
+
+		if (matched) filterList.push(row);
+	}
+	return filterList;
+};

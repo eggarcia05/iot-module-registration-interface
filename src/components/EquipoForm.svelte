@@ -2,10 +2,16 @@
 	import CheckboxComponet from './checkbox-componet.svelte';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 	import Autocomplete from './Autocomplete.svelte';
+	import { filtrarLista } from '../utils/helper-functions';
+	import CheckboxList from './checkbox-List.svelte';
 
 	export let etiquetas: Etiqueta[];
-	let url = '';
+	export let haystackTags: Haystack[];
+	let hayStackFiltrado: any[];
+
 	$: cont = 0;
+	$: hayStackFiltrado = [];
+	$: texto = '';
 
 	console.log(etiquetas);
 
@@ -17,6 +23,10 @@
 
 		$NUEVA_ENTIDAD['tags'][tag] = valor;
 		console.log($NUEVA_ENTIDAD);
+	};
+
+	const filtrar = async () => {
+		hayStackFiltrado = filtrarLista(texto, haystackTags);
 	};
 
 	const handleContador = (event: any) => (cont += event.detail);
@@ -45,7 +55,7 @@
 										id={etiqueta.tag}
 										type="text"
 										on:keyup={construirNuevaEntidad}
-										placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
+										placeholder={etiqueta.haystack_tag?.descripcion ?? ''}
 									/>
 								{/if}
 							</div>
@@ -80,6 +90,18 @@
 			{/if}
 		</div>
 	</div>
+	<input
+		class="appearance-none block w-full mb-5 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+		id={'filter'}
+		type="text"
+		bind:value={texto}
+		on:keyup={filtrar}
+		placeholder={'Buscar etiqueta...'}
+	/>
+	<CheckboxList
+		data={hayStackFiltrado && texto ? hayStackFiltrado : haystackTags}
+		on:new_tag={() => alert('ok')}
+	/>
 </div>
 
 <style>

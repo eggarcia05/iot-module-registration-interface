@@ -8,6 +8,7 @@
 
 	let entidadSeleccionada: Entidad;
 	let etiquetas: Etiqueta[] | null;
+	let haystackTags: Haystack[] | null;
 
 	$: etiquetas = null;
 
@@ -33,6 +34,15 @@
 		const response = await res.json();
 
 		etiquetas = response?.etiquetas ?? [];
+	};
+
+	const getHaystackTags = async (): Promise<any> => {
+		haystackTags = null;
+	
+		const res = await fetch(`/api/queries-fetcher`, buildRequest('haystack_tags', {}));
+		const response = await res.json();
+
+		haystackTags = response?.haystack_tags ?? [];
 	};
 
 	const getEntidades = async (): Promise<any> => {
@@ -69,11 +79,12 @@
 
 	onMount(async () => {
 		await getEntidades();
+		await getHaystackTags();
 	});
 </script>
 
-<div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-2 pt:mt-0">
-	<div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
+<div class="mx-auto md:min-h-screen flex flex-col justify-center items-center px-6 pt-2 pt:mb-10">
+	<div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0 ">
 		<div class="p-6 sm:p-8 lg:p-16 space-y-8">
 			<h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Registrar Entidad</h2>
 			<form class="w-full max-w-lg">
@@ -116,13 +127,13 @@
 						</div>
 					</div>
 				</div>
-				{#if etiquetas}
+				{#if etiquetas && haystackTags}
 					{#if entidadSeleccionada.tipo === 'equip'}
-						<EquipoForm {etiquetas} />
+						<EquipoForm {etiquetas} {haystackTags}/>
 					{:else if entidadSeleccionada.tipo === 'site'}
-						<SitioForm {etiquetas} />
+						<SitioForm {etiquetas} {haystackTags}/>
 					{:else if entidadSeleccionada.tipo === 'point'}
-						<PuntoForm {etiquetas} />
+						<PuntoForm {etiquetas} {haystackTags}/>
 					{/if}
 				{/if}
 				<div class="text-center lg:text-center">

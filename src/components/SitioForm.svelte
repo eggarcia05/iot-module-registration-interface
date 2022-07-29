@@ -1,10 +1,16 @@
 <script lang="ts">
 	import CheckboxComponet from './checkbox-componet.svelte';
+	import CheckboxList from './checkbox-List.svelte';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
+	import { filtrarLista } from '../utils/helper-functions';
 
 	export let etiquetas: Etiqueta[];
-	let url = '';
+	export let haystackTags: Haystack[];
+	let hayStackFiltrado: any[]
+
 	$: cont = 0;
+	$: hayStackFiltrado = [];
+	$: texto = "";
 
 	const construirNuevaEntidad = async (event: any): Promise<void> => {
 		const tag = event.target.id;
@@ -13,6 +19,10 @@
 		if (Object.keys($NUEVA_ENTIDAD).includes(tag)) $NUEVA_ENTIDAD[tag] = valor;
 
 		$NUEVA_ENTIDAD['tags'][tag] = valor;
+	};
+
+	const filtrar = async () => {
+		hayStackFiltrado = filtrarLista(texto, haystackTags);
 	};
 
 	const handleContador = (event: any) => (cont += event.detail);
@@ -38,7 +48,7 @@
 									id={etiqueta.tag}
 									type="text"
 									on:keyup={construirNuevaEntidad}
-									placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
+									placeholder={etiqueta.haystack_tag?.descripcion ?? ''}
 								/>
 							</div>
 						{/if}
@@ -54,10 +64,10 @@
 				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 				for="grid-password"
 			>
-				Etiquetas Disponibles
+				Etiquetas Frecuentes:
 			</label>
 			{#if !cont}
-				<p class="text-red-500 text-xs italic">No existen etiquetas disponibles</p>
+				<p class="text-red-500 text-xs italic">No existen etiquetas frecuentes</p>
 			{/if}
 			{#if etiquetas}
 				<div class="grid grid-cols-3 gap-4 mt-5 ml-4">
@@ -72,6 +82,18 @@
 			{/if}
 		</div>
 	</div>
+	<input
+		class="appearance-none block w-full mb-5 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+		id={'filter'}
+		type="text"
+		bind:value={texto}
+		on:keyup={filtrar}
+		placeholder={'Buscar etiqueta...'}
+	/>
+	<CheckboxList
+		data={hayStackFiltrado && texto ? hayStackFiltrado : haystackTags}
+		on:new_tag={() => alert('ok')}
+	/>
 </div>
 
 <style>
