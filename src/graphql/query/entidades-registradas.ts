@@ -1,8 +1,8 @@
 import { gql } from '@urql/core';
 
 export const site = gql`
-	query sites {
-		site {
+	query sites($where: site_bool_exp = {}) {
+		site(where: $where) {
 			id
 			dis
 		}

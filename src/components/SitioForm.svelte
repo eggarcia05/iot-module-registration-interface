@@ -3,18 +3,19 @@
 	import CheckboxList from './checkbox-List.svelte';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 	import { filtrarLista } from '../utils/helper-functions';
+	import AutocompleteIdentificador from './Autocomplete-identificadores.svelte';
 
 	export let etiquetas: Etiqueta[];
 	export let haystackTags: Haystack[];
-	let hayStackFiltrado: any[]
+	let hayStackFiltrado: any[];
 
 	$: cont = 0;
 	$: hayStackFiltrado = [];
-	$: texto = "";
+	$: texto = '';
 
 	const construirNuevaEntidad = async (event: any): Promise<void> => {
-		const tag = event.target.id;
-		const valor = event.target.value;
+		let tag = event.target.id;
+		let valor = event.target.value;
 
 		if (Object.keys($NUEVA_ENTIDAD).includes(tag)) $NUEVA_ENTIDAD[tag] = valor;
 
@@ -43,13 +44,17 @@
 									{etiqueta.nombre}
 									{etiqueta.requerido ? ' *' : ''}
 								</label>
-								<input
-									class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-									id={etiqueta.tag}
-									type="text"
-									on:keyup={construirNuevaEntidad}
-									placeholder={etiqueta.haystack_tag?.descripcion ?? ''}
-								/>
+								{#if etiqueta.tag.includes('id')}
+									<AutocompleteIdentificador tipoEntidad={'site'} />
+								{:else}
+									<input
+										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id={etiqueta.tag}
+										type="text"
+										on:keyup={construirNuevaEntidad}
+										placeholder={etiqueta.haystack_tag?.descripcion ?? ''}
+									/>
+								{/if}
 							</div>
 						{/if}
 					{/each}

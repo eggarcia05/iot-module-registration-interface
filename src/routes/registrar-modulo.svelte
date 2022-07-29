@@ -71,10 +71,12 @@
 			$NUEVA_ENTIDAD['id'] = idGenerado;
 			$NUEVA_ENTIDAD['tags']['id'] = idGenerado;
 			const response = await fetchMutation();
-			return response;
+			if(response?.data) {
+				window.location.reload();
+			}
 		}
-
-		return response;
+		alert("Error. Por favor complete correctamente el formulario.")
+		
 	};
 
 	onMount(async () => {

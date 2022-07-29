@@ -4,15 +4,16 @@
 	import Autocomplete from './Autocomplete.svelte';
 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 	import { filtrarLista } from '../utils/helper-functions';
+	import AutocompleteIdentificador from './Autocomplete-identificadores.svelte';
 
 	export let etiquetas: Etiqueta[];
 	export let haystackTags: Haystack[];
-	let hayStackFiltrado: any[]
-	
+	let hayStackFiltrado: any[];
+
 	let cont = 0;
 	let parametro: string;
 	$: hayStackFiltrado = [];
-	$: texto = "";
+	$: texto = '';
 
 	const construirNuevaEntidad = async (event: any): Promise<void> => {
 		const tag = event.target.id;
@@ -47,13 +48,15 @@
 								</label>
 								{#if etiqueta.tag.includes('Ref')}
 									<Autocomplete tipoEntidad={etiqueta.tag} />
+								{:else if etiqueta.tag.includes('id')}
+									<AutocompleteIdentificador tipoEntidad={'equip'} />
 								{:else}
 									<input
 										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										id={etiqueta.tag}
 										type="text"
 										on:keyup={construirNuevaEntidad}
-										placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
+										placeholder={etiqueta.haystack_tag?.descripcion ?? ''}
 									/>
 								{/if}
 							</div>

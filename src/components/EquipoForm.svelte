@@ -4,6 +4,7 @@
 	import Autocomplete from './Autocomplete.svelte';
 	import { filtrarLista } from '../utils/helper-functions';
 	import CheckboxList from './checkbox-List.svelte';
+	import AutocompleteIdentificador from './Autocomplete-identificadores.svelte';
 
 	export let etiquetas: Etiqueta[];
 	export let haystackTags: Haystack[];
@@ -49,6 +50,8 @@
 								</label>
 								{#if etiqueta.tag.includes('Ref')}
 									<Autocomplete tipoEntidad={etiqueta.tag} />
+								{:else if etiqueta.tag.includes('id')}
+									<AutocompleteIdentificador tipoEntidad={'equip'} />
 								{:else}
 									<input
 										class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
