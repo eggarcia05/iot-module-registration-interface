@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CheckboxComponet from './checkbox-componet.svelte';
- 	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
+	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 	import Autocomplete from './Autocomplete.svelte';
 
 	export let etiquetas: Etiqueta[];
@@ -45,7 +45,7 @@
 										id={etiqueta.tag}
 										type="text"
 										on:keyup={construirNuevaEntidad}
-										placeholder={etiqueta.descripcion}
+										placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
 									/>
 								{/if}
 							</div>

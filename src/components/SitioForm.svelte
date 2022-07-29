@@ -10,11 +10,9 @@
 		const tag = event.target.id;
 		const valor = event.target.value;
 
-		if(Object.keys($NUEVA_ENTIDAD).includes(tag))
-			$NUEVA_ENTIDAD[tag] = valor;
-		
+		if (Object.keys($NUEVA_ENTIDAD).includes(tag)) $NUEVA_ENTIDAD[tag] = valor;
+
 		$NUEVA_ENTIDAD['tags'][tag] = valor;
-		
 	};
 
 	const handleContador = (event: any) => (cont += event.detail);
@@ -40,7 +38,7 @@
 									id={etiqueta.tag}
 									type="text"
 									on:keyup={construirNuevaEntidad}
-									placeholder={etiqueta.descripcion}
+									placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
 								/>
 							</div>
 						{/if}

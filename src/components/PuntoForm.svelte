@@ -42,31 +42,29 @@
 										id={etiqueta.tag}
 										type="text"
 										on:keyup={construirNuevaEntidad}
-										placeholder={etiqueta.descripcion}
+										placeholder={etiqueta.haystack_tag?.descripcion ?? ""}
 									/>
 								{/if}
 							</div>
 						{/if}
 					{/each}
-					
 				</div>
 				<label
-						class="block uppercase tracking-wide text-gray-700 text-xs mt-4 font-bold mb-2"
-						for="grid-last-name"
-					>
-						{'Parámetro Esperado *'}
-					</label>
-					<input
-						class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-						id={'clave_esperada'}
-						type="text"
-						bind:value={parametro}
-						on:keyup={ () => {
-							$NUEVA_ENTIDAD['clave_esperada'] = parametro;
-						}
-						}
-						placeholder={'Nombre del parámetro que contendrá el valor sensado por este Punto'}
-					/>
+					class="block uppercase tracking-wide text-gray-700 text-xs mt-4 font-bold mb-2"
+					for="grid-last-name"
+				>
+					{'Parámetro Esperado *'}
+				</label>
+				<input
+					class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+					id={'clave_esperada'}
+					type="text"
+					bind:value={parametro}
+					on:keyup={() => {
+						$NUEVA_ENTIDAD['clave_esperada'] = parametro;
+					}}
+					placeholder={'Nombre del parámetro que contendrá el valor sensado por este Punto'}
+				/>
 			{/if}
 		</div>
 	</div>

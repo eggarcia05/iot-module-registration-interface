@@ -5,7 +5,9 @@ export const etiquetas = gql`
 		etiquetas(where: { entidad_id: { _eq: $entidad_id } }, order_by: { orden: asc_nulls_last }) {
 			id
 			tag
-			descripcion
+			haystack_tag {
+				descripcion
+			}
 			nombre
 			requerido
 		}

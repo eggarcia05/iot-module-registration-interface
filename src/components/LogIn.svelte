@@ -10,7 +10,7 @@
             aud: 'authenticated'
         }
 
-		alert('logged')
+		// alert('logged')
 	};
 </script>
 <section class="h-screen">

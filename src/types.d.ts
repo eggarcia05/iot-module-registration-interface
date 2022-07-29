@@ -4,10 +4,14 @@ interface Entidad {
 	tipo: string;
 }
 
+interface Haystack {
+	tag: string
+	descripcion: string
+}
 interface Etiqueta {
 	id: string;
 	nombre: string;
 	tag: string;
-	descripcion?: string;
-	requerido: boolean
+	haystack_tag?: Haystack;
+	requerido: boolean;
 }
