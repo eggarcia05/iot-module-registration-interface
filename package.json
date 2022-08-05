@@ -2,7 +2,7 @@
 	"name": "register-modules-system",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev --host",
+		"dev": "svelte-kit dev --host --port 8089",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -30,7 +30,11 @@
 	},
 	"dependencies": {
 		"@urql/core": "^2.4.4",
-		"simple-svelte-autocomplete": "^2.2.3"
+		"fusioncharts": "^3.19.0",
+		"simple-svelte-autocomplete": "^2.2.3",
+		"socket.io": "^4.5.1",
+		"socket.io-client": "^4.5.1",
+		"svelte-fusioncharts": "^1.0.0"
 	},
 	"type": "module"
 }

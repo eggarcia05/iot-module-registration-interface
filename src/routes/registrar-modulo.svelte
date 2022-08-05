@@ -85,7 +85,7 @@
 	});
 </script>
 
-<div class="mx-auto md:min-h-screen flex flex-col justify-center items-center px-6 pt-2 pt:mb-10">
+<div class="mx-auto md:min-h-screen mt-7 flex flex-col justify-center items-center px-6 pt-2 pt:mb-10">
 	<div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0 ">
 		<div class="p-6 sm:p-8 lg:p-16 space-y-8">
 			<h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Registrar Entidad</h2>

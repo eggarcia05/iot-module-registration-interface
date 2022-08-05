@@ -4,3 +4,4 @@
 // 	var __ANOTHER_ENV_VAR__: string;
 // }
 declare module 'simple-svelte-autocomplete'
+declare module 'svelte-fusioncharts';
