@@ -34,7 +34,8 @@
 		"simple-svelte-autocomplete": "^2.2.3",
 		"socket.io": "^4.5.1",
 		"socket.io-client": "^4.5.1",
-		"svelte-fusioncharts": "^1.0.0"
+		"svelte-fusioncharts": "^1.0.0",
+		"svelte-select": "^4.4.7"
 	},
 	"type": "module"
 }

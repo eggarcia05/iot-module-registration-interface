@@ -8,12 +8,7 @@ const config = {
 	preprocess: preprocess({ postcss: true }),
 
 	kit: {
-		adapter: adapter(),
-		vite: {
-			ssr: {
-				external: ['input-core']
-			}
-		}
+		adapter: adapter()
 	}
 };
 

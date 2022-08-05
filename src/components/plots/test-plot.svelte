@@ -2,18 +2,22 @@
 	import FusionCharts from 'fusioncharts';
 	import Timeseries from 'fusioncharts/fusioncharts.timeseries';
 	import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
-
-	fcRoot(FusionCharts, Timeseries);
 	import { onMount } from 'svelte';
+
+	export let pointId: string;
+	fcRoot(FusionCharts, Timeseries);
+
+	$: {
+		pointId;
+		data = [];
+		
+	}
 	//@ts-ignore
 	var myHeaders = new Headers();
 	myHeaders.append('Content-Type', 'application/json');
 
 	const raw = JSON.stringify({
-		pointsIds: ['27803f1a-5bfd-4a3c-8d1e-b1e4faf3aa7f'],
-		intervaloTimestamp: {
-			timestampFinal: '2022-07-10'
-		},
+		pointsIds: [pointId],
 		filtroPorEtiquetas: {
 			etiquetas: []
 		}
@@ -35,9 +39,9 @@
 
 	const formatResponse = (response: any) => {
 		data = [];
-		captionText = response.result[0].point.dis;
-		subCaptionText = response.result[0].point.equip.dis;
-		unit = response.result[0].registro.unit;
+		captionText = response.result?.[0].point.dis;
+		subCaptionText = response.result?.[0].point.equip.dis;
+		unit = response.result?.[0].registro.unit;
 		for (let rv of response.result) {
 			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
 		}
@@ -69,13 +73,10 @@
 	];
 
 	let chartConfig: any;
-	$: {
-		console.log(chartConfig);
-	}
+	$: chartConfig;
 
 	const getChartConfig = () => {
-		console.log(data);
-		schema[1].name = `Lecturas de ${captionText} ${unit}`;
+		schema[1].name = `Lecturas de ${captionText} (${unit})`;
 
 		const fusionDataStore = new FusionCharts.DataStore(),
 			fusionTable = fusionDataStore.createDataTable(data, schema);
@@ -111,6 +112,7 @@
 </script>
 
 <div id="chart-container">
+	{pointId}
 	{#if chartConfig}
 		<SvelteFC {...chartConfig} />
 	{/if}
