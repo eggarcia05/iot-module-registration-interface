@@ -1,4 +1,5 @@
 <script lang="ts">
+	export const prerender = false;
 	import FusionCharts from 'fusioncharts';
 	import Timeseries from 'fusioncharts/fusioncharts.timeseries';
 	import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
@@ -10,7 +11,6 @@
 	$: {
 		pointId;
 		data = [];
-		
 	}
 	//@ts-ignore
 	var myHeaders = new Headers();
@@ -20,7 +20,8 @@
 		pointsIds: [pointId],
 		filtroPorEtiquetas: {
 			etiquetas: []
-		}
+		},
+		limite: 25
 	});
 
 	const requestOptions: any = {
@@ -42,7 +43,7 @@
 		captionText = response.result?.[0].point.dis;
 		subCaptionText = response.result?.[0].point.equip.dis;
 		unit = response.result?.[0].registro.unit;
-		for (let rv of response.result) {
+		for (let rv of response.result.slice(0,25)) {
 			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
 		}
 
@@ -53,6 +54,8 @@
 		response = await res.json();
 		formatResponse(response);
 		getChartConfig();
+		console.log('OK');
+
 		setTimeout(getSensorData, 40 * 1000);
 	};
 
@@ -112,8 +115,9 @@
 </script>
 
 <div id="chart-container">
-	{pointId}
 	{#if chartConfig}
-		<SvelteFC {...chartConfig} />
+		<!-- {#key chartConfig} -->
+			<SvelteFC {...chartConfig} />
+		<!-- {/key} -->
 	{/if}
 </div>

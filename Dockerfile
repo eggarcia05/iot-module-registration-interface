@@ -13,7 +13,7 @@ RUN npm i
 RUN npm audit fix
     
 # build SvelteKit app
-RUN npm run build
+# RUN npm run build
 
 
 # # stage run

@@ -1,9 +1,17 @@
 <script lang="ts">
-	//@ts-ignore
+	export const prerender = false;
+
 	import Select from 'svelte-select';
 	import { buildRequest } from '../utils/helper-functions';
-	import TestPlot from '../components/plots/test-plot.svelte';
+	// import TestPlot from '../components/plots/test-plot.svelte';
+	import { onMount } from 'svelte';
 
+	let MyComponent: any;
+
+	onMount(async () => {
+		const module = await import('../components/plots/test-plot.svelte');
+		MyComponent = module.default;
+	});
 	let items: any[] = [];
 	$: items;
 	let selectedPointId: any;
@@ -45,9 +53,12 @@
 			<Select {items} {value} on:select={handleSelect} />
 		</div>
 	</div>
-	{#key selectedPointId}
-		<TestPlot pointId={selectedPointId} />
-	{/key}
+	{#if selectedPointId}
+		{#key selectedPointId}
+			<!-- <TestPlot pointId={selectedPointId} /> -->
+			<svelte:component this={MyComponent} pointId={selectedPointId} />
+		{/key}
+	{/if}
 </div>
 
 <style>
