@@ -53,12 +53,22 @@
 			<Select {items} {value} on:select={handleSelect} />
 		</div>
 	</div>
-	{#if selectedPointId}
-		{#key selectedPointId}
-			<!-- <TestPlot pointId={selectedPointId} /> -->
-			<svelte:component this={MyComponent} pointId={selectedPointId} />
-		{/key}
-	{/if}
+	<div class=" w-full h-10">
+		<div class="grid grid-cols-2 gap-4">
+			{#if selectedPointId}
+				{#key selectedPointId}
+					<!-- <TestPlot pointId={selectedPointId} /> -->
+					<svelte:component this={MyComponent} pointId={selectedPointId} />
+				{/key}
+			{/if}
+			{#if selectedPointId}
+				{#key selectedPointId}
+					<!-- <TestPlot pointId={selectedPointId} /> -->
+					<svelte:component this={MyComponent} pointId={selectedPointId} />
+				{/key}
+			{/if}
+		</div>
+	</div>
 </div>
 
 <style>

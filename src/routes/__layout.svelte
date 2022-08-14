@@ -12,7 +12,7 @@
 {/if}
 
 {#if true || $user?.aud === 'authenticated'}
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 md:pb-44 ">
+	<div class="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pb-20 md:pb-44 ">
 		<Navbar />
 		<slot />
 	</div>

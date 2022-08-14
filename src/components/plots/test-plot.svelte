@@ -11,6 +11,7 @@
 	$: {
 		pointId;
 		data = [];
+		console.log(data);
 	}
 	//@ts-ignore
 	var myHeaders = new Headers();
@@ -21,7 +22,7 @@
 		filtroPorEtiquetas: {
 			etiquetas: []
 		},
-		limite: 25
+		limite: 2000
 	});
 
 	const requestOptions: any = {
@@ -43,9 +44,10 @@
 		captionText = response.result?.[0].point.dis;
 		subCaptionText = response.result?.[0].point.equip.dis;
 		unit = response.result?.[0].registro.unit;
-		for (let rv of response.result.slice(0,25)) {
+		for (let rv of response.result) {
 			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
 		}
+		console.log(data);
 
 		return data;
 	};
@@ -55,8 +57,7 @@
 		formatResponse(response);
 		getChartConfig();
 		console.log('OK');
-
-		setTimeout(getSensorData, 40 * 1000);
+		// setTimeout(getSensorData, 4 * 1000);
 	};
 
 	onMount(() => {
@@ -101,7 +102,8 @@
 					{
 						plot: {
 							value: 'Grocery Sales Value',
-							type: 'line'
+							type: 'line',
+							connectnulldata: true
 						},
 						format: {
 							sufix: '$'
@@ -112,12 +114,18 @@
 			}
 		};
 	};
+	let char: any;
+	$: char;
+	const renderCompleteHandler = (event: any) => {
+		event.detail.sender.originalDataSource.data._data[0] = [ 1660225513000, 90, "14020" ] 
+		console.log(event.detail.sender.originalDataSource.data._data[0] );
+	};
 </script>
 
 <div id="chart-container">
 	{#if chartConfig}
 		<!-- {#key chartConfig} -->
-			<SvelteFC {...chartConfig} />
+		<SvelteFC {...chartConfig} on:renderComplete={renderCompleteHandler} bind:chart={char} />
 		<!-- {/key} -->
 	{/if}
 </div>
