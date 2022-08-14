@@ -1,18 +1,19 @@
 <script lang="ts">
-	export const prerender = false;
 	import FusionCharts from 'fusioncharts';
 	import Timeseries from 'fusioncharts/fusioncharts.timeseries';
 	import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
 	import { onMount } from 'svelte';
 
 	export let pointId: string;
+
 	fcRoot(FusionCharts, Timeseries);
 
-	$: {
-		pointId;
-		data = [];
-		console.log(data);
-	}
+	$: pointId;
+
+	let captionText = '';
+	let subCaptionText = '';
+	let unit = '';
+
 	//@ts-ignore
 	var myHeaders = new Headers();
 	myHeaders.append('Content-Type', 'application/json');
@@ -32,36 +33,33 @@
 		redirect: 'follow'
 	};
 
-	let response: any;
-	let data: any[] = [];
-
-	$: captionText = '';
-	$: subCaptionText = '';
-	$: unit = '';
+	let data2: any[] = [];
 
 	const formatResponse = (response: any) => {
-		data = [];
+		let data: any = [];
 		captionText = response.result?.[0].point.dis;
 		subCaptionText = response.result?.[0].point.equip.dis;
 		unit = response.result?.[0].registro.unit;
 		for (let rv of response.result) {
 			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
 		}
-		console.log(data);
-
 		return data;
 	};
 	const getSensorData = async () => {
-		const res = await fetch('http://localhost:8081/obtener-datos', requestOptions);
-		response = await res.json();
-		formatResponse(response);
-		getChartConfig();
-		console.log('OK');
-		// setTimeout(getSensorData, 4 * 1000);
+		try {
+			const res = await fetch('http://localhost:8081/obtener-datos', requestOptions);
+			const response = await res.json();
+			const formatedResponse = formatResponse(response);
+			return formatedResponse;
+		} catch (e: any) {
+			console.log(e);
+
+			throw new Error(e);
+		}
 	};
 
 	onMount(() => {
-		getSensorData();
+		// getSensorData();
 	});
 
 	const schema = [
@@ -76,20 +74,22 @@
 		}
 	];
 
-	let chartConfig: any;
-	$: chartConfig;
-
-	const getChartConfig = () => {
+	const getChartConfig = (data: any) => {
 		schema[1].name = `Lecturas de ${captionText} (${unit})`;
 
-		const fusionDataStore = new FusionCharts.DataStore(),
-			fusionTable = fusionDataStore.createDataTable(data, schema);
+		const fusionDataStore = new FusionCharts.DataStore();
+		const fusionTable = fusionDataStore.createDataTable(data, schema);
 
-		chartConfig = {
+		const chartConfig = {
 			type: 'timeseries',
 			width: '100%',
 			height: 450,
 			renderAt: 'chart-container',
+			chart: {
+				style: {
+					background: "red"
+				}
+			},
 			dataSource: {
 				data: fusionTable,
 				caption: {
@@ -113,19 +113,33 @@
 				]
 			}
 		};
+
+		return chartConfig;
 	};
-	let char: any;
-	$: char;
+
+	let chartComponent: any;
+
+	const updateData = async () => {
+		const updatedSensorData = await getSensorData();
+		chartComponent.feedData([...updatedSensorData]);
+		setTimeout(updateData, 1 * 1000);
+	};
+
 	const renderCompleteHandler = (event: any) => {
-		event.detail.sender.originalDataSource.data._data[0] = [ 1660225513000, 90, "14020" ] 
-		console.log(event.detail.sender.originalDataSource.data._data[0] );
+		updateData();
 	};
 </script>
 
-<div id="chart-container">
-	{#if chartConfig}
-		<!-- {#key chartConfig} -->
-		<SvelteFC {...chartConfig} on:renderComplete={renderCompleteHandler} bind:chart={char} />
-		<!-- {/key} -->
-	{/if}
+<div id="chart-container" class="sm:max-w-screen">
+	{#await getSensorData()}
+		<p>Obteniendo datos y esquema...</p>
+	{:then value}
+		<SvelteFC
+			{...getChartConfig(value)}
+			on:renderComplete={renderCompleteHandler}
+			bind:chart={chartComponent}
+		/>
+	{:catch error}
+		<p>Something went wrong: {error.message}</p>
+	{/await}
 </div>

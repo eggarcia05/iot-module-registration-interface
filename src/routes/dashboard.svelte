@@ -46,7 +46,7 @@
 	getPoints();
 </script>
 
-<div class="mt-24 ">
+<div class="mt-24 w-full">
 	<div class=" items-center md:flex mb-8">
 		<div class="ml-24">Punto:</div>
 		<div class="ml-8 w-full mr-14">
@@ -54,19 +54,18 @@
 		</div>
 	</div>
 	<div class=" w-full h-10">
-		<div class="grid grid-cols-2 gap-4">
+		<div class="grid  grid-cols-1">
 			{#if selectedPointId}
 				{#key selectedPointId}
-					<!-- <TestPlot pointId={selectedPointId} /> -->
 					<svelte:component this={MyComponent} pointId={selectedPointId} />
 				{/key}
 			{/if}
 			{#if selectedPointId}
 				{#key selectedPointId}
-					<!-- <TestPlot pointId={selectedPointId} /> -->
 					<svelte:component this={MyComponent} pointId={selectedPointId} />
 				{/key}
 			{/if}
+		
 		</div>
 	</div>
 </div>
