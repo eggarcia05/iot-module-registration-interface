@@ -8,11 +8,8 @@
 	
 	const getItemsPadres = async (): Promise<any> => {
 		const query = tipoEntidad.split('Ref')[0];
-		console.log(query)
 		const res = await fetch(`/api/queries-fetcher`, buildRequest(query));
 		const response = await res.json();
-		console.log(response);
-		
 
 		return response?.[query] ?? [];
 	};

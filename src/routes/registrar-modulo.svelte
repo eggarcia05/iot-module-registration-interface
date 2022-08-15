@@ -18,9 +18,6 @@
 		}
 	}
 
-	$: {
-		console.log($NUEVA_ENTIDAD)
-	}
 	const construirNuevaEntidad = async (): Promise<void> => {
 		NUEVA_ENTIDAD.clear()		
 	}

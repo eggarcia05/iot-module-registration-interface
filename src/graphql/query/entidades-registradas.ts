@@ -19,10 +19,11 @@ export const equip = gql`
 `;
 
 export const point = gql`
-	query points {
-		point {
+	query points($where: point_bool_exp = {}) {
+		point(where: $where) {
 			id
 			dis
+			tags
 		}
 	}
 `;

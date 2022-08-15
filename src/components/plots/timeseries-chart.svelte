@@ -2,9 +2,10 @@
 	import FusionCharts from 'fusioncharts';
 	import Timeseries from 'fusioncharts/fusioncharts.timeseries';
 	import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	export let pointId: string;
+	export let timeRefreshData: number = 45;
 
 	fcRoot(FusionCharts, Timeseries);
 
@@ -33,8 +34,6 @@
 		redirect: 'follow'
 	};
 
-	let data2: any[] = [];
-
 	const formatResponse = (response: any) => {
 		let data: any = [];
 		captionText = response.result?.[0].point.dis;
@@ -52,14 +51,17 @@
 			const formatedResponse = formatResponse(response);
 			return formatedResponse;
 		} catch (e: any) {
-			console.log(e);
-
 			throw new Error(e);
 		}
 	};
 
 	onMount(() => {
 		// getSensorData();
+	});
+
+	onDestroy(() => {
+		clearInterval(interval);
+		console.log('DEstroy');
 	});
 
 	const schema = [
@@ -83,13 +85,8 @@
 		const chartConfig = {
 			type: 'timeseries',
 			width: '100%',
-			height: 450,
+			height: 600,
 			renderAt: 'chart-container',
-			chart: {
-				style: {
-					background: "red"
-				}
-			},
 			dataSource: {
 				data: fusionTable,
 				caption: {
@@ -101,14 +98,14 @@
 				yAxis: [
 					{
 						plot: {
-							value: 'Grocery Sales Value',
+							value: 'Valor Sensado',
 							type: 'line',
 							connectnulldata: true
 						},
 						format: {
 							sufix: '$'
 						},
-						title: 'Sale Value'
+						title: `Lecturas de ${captionText}`
 					}
 				]
 			}
@@ -119,14 +116,22 @@
 
 	let chartComponent: any;
 
+	let interval: any;
+
 	const updateData = async () => {
 		const updatedSensorData = await getSensorData();
-		chartComponent.feedData([...updatedSensorData]);
-		setTimeout(updateData, 1 * 1000);
+		if (!!chartComponent?.feedData) chartComponent.feedData([...updatedSensorData]);
+
+		// setTimeout(updateData, timeRefreshData * 1000);
 	};
 
-	const renderCompleteHandler = (event: any) => {
-		updateData();
+	const renderCompleteHandler = async (event: any) => {
+		
+		if(!interval){
+			console.log(chartComponent?.feedData);
+
+			interval = setInterval(async () => await updateData(), timeRefreshData * 1000);
+		}
 	};
 </script>
 

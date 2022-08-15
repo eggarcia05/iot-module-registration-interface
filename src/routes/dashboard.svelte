@@ -5,13 +5,15 @@
 	import { buildRequest } from '../utils/helper-functions';
 	// import TestPlot from '../components/plots/test-plot.svelte';
 	import { onMount } from 'svelte';
+	import Tab from '../components/tab-equipment/tabs-container.svelte';
 
 	let MyComponent: any;
 
 	onMount(async () => {
-		const module = await import('../components/plots/test-plot.svelte');
+		const module = await import('../components/plots/timeseries-chart.svelte');
 		MyComponent = module.default;
 	});
+
 	let items: any[] = [];
 	$: items;
 	let selectedPointId: any;
@@ -34,7 +36,6 @@
 	const getPoints = async (): Promise<any> => {
 		const res = await fetch(`/api/queries-fetcher`, buildRequest('point'));
 		const response = await res.json();
-		console.log(response);
 
 		items = formatPoints(response?.point);
 	};
@@ -47,13 +48,14 @@
 </script>
 
 <div class="mt-24 w-full">
-	<div class=" items-center md:flex mb-8">
+	<!-- <div class=" items-center md:flex mb-8">
 		<div class="ml-24">Punto:</div>
 		<div class="ml-8 w-full mr-14">
 			<Select {items} {value} on:select={handleSelect} />
 		</div>
-	</div>
+	</div> -->
 	<div class=" w-full h-10">
+		<Tab />
 		<div class="grid  grid-cols-1">
 			{#if selectedPointId}
 				{#key selectedPointId}
@@ -65,7 +67,6 @@
 					<svelte:component this={MyComponent} pointId={selectedPointId} />
 				{/key}
 			{/if}
-		
 		</div>
 	</div>
 </div>
