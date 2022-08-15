@@ -68,7 +68,7 @@
 				{#key selectedPointId}
 					{#if selectedPointId.tags.run}
 						<Actuador
-							pointId={selectedPointId.value}
+							point={selectedPointId}
 						/>
 					{:else}
 						<svelte:component
@@ -82,7 +82,7 @@
 				{#each items as item}
 					{#if item.tags.run}
 						<Actuador
-							pointId={item.value}
+							point={item}
 						/>
 					{/if}
 				{/each}

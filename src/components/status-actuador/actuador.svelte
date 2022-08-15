@@ -1,9 +1,8 @@
 <script lang="ts">
-	import Switch from 'svelte-switch';
 
-	export let pointId: string;
+	export let point: any;
 
-	$: pointId;
+	$: point;
 	let checkedValue: any;
 	$: checkedValue;
 
@@ -12,7 +11,7 @@
 	myHeaders.append('Content-Type', 'application/json');
 
 	const raw = JSON.stringify({
-		pointsIds: [pointId],
+		pointsIds: [point.value],
 		filtroPorEtiquetas: {
 			etiquetas: []
 		},
@@ -40,7 +39,6 @@
 	};
 
 	async function handleChange(e: any) {
-		console.log('🚀 ~ file: actuador.svelte ~ line 44 ~ handleChange ~ e.detail.checked', e);
 		// await getEstadoActuador();
         checkedValue = !checkedValue;
 	}
@@ -55,7 +53,7 @@
 			<span
 				class= "font-bold not-italic text-base text-gray-700 inline-block align-middle mr-8 pl-1"
 			>
-				{value.registro.dis}: {value.registro['value'].toUpperCase()}
+				{value?.registro?.dis ?? point.label}: {(value?.registro?.['value'] ??  "off").toUpperCase()}
 			</span>
 			{#key checkedValue}
 				<button
