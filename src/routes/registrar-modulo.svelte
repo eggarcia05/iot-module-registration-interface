@@ -4,7 +4,7 @@
 	import PuntoForm from '../components/PuntoForm.svelte';
 	import SitioForm from '../components/SitioForm.svelte';
 	import { buildRequest, deleteNullProperties } from '../utils/helper-functions';
-	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad'
+	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
 
 	let entidadSeleccionada: Entidad;
 	let etiquetas: Etiqueta[] | null;
@@ -17,10 +17,13 @@
 			getEtiquetas();
 		}
 	}
+	$: {
+		console.log($NUEVA_ENTIDAD);
+	}
 
 	const construirNuevaEntidad = async (): Promise<void> => {
-		NUEVA_ENTIDAD.clear()		
-	}
+		NUEVA_ENTIDAD.clear();
+	};
 
 	const getEtiquetas = async (): Promise<any> => {
 		etiquetas = null;
@@ -35,7 +38,7 @@
 
 	const getHaystackTags = async (): Promise<any> => {
 		haystackTags = null;
-	
+
 		const res = await fetch(`/api/queries-fetcher`, buildRequest('haystack_tags', {}));
 		const response = await res.json();
 
@@ -48,32 +51,39 @@
 
 		return response?.entidades ?? [];
 	};
-	
+
 	const fetchMutation = async (): Promise<any> => {
 		const query = entidadSeleccionada.tipo;
-		const variables = {object: $NUEVA_ENTIDAD};
+		const variables = { object: $NUEVA_ENTIDAD };
 		const res = await fetch(`/api/mutations-fetcher`, buildRequest(query, variables));
-		return await res.json();
-	}
+		const response = await res.json();
+		return response;
+	};
 
 	const guardarEntidad = async (): Promise<any> => {
-		$NUEVA_ENTIDAD = deleteNullProperties($NUEVA_ENTIDAD)
+		$NUEVA_ENTIDAD = deleteNullProperties($NUEVA_ENTIDAD);
 		const query = entidadSeleccionada.tipo;
 		const response = await fetchMutation();
-	
-		const idGenerado = response?.[`insert_${query}`]?.
-								returning?.[0].id ?? null;
+		console.log('🚀 ', JSON.stringify(response));
 
-		if( idGenerado ){
+		const idGenerado = response?.[`insert_${query}`]?.returning?.[0].id ?? null;
+		console.log(
+			'🚀 ~ file: registrar-modulo.svelte ~ line 69 ~ guardarEntidad ~ idGenerado',
+			idGenerado
+		);
+
+		if (idGenerado) {
 			$NUEVA_ENTIDAD['id'] = idGenerado;
 			$NUEVA_ENTIDAD['tags']['id'] = idGenerado;
 			const response = await fetchMutation();
-			if(response?.data) {
+			if (response?.[`insert_${query}`]?.returning?.[0].id) {
 				window.location.reload();
+			} else {
+				alert('Error. Por favor complete correctamente el formulario.');
 			}
+		} else {
+			alert('Error. Por favor complete correctamente el formulario.');
 		}
-		alert("Error. Por favor complete correctamente el formulario.")
-		
 	};
 
 	onMount(async () => {
@@ -82,7 +92,9 @@
 	});
 </script>
 
-<div class="mx-auto md:min-h-screen mt-7 flex flex-col justify-center items-center px-6 pt-2 pt:mb-10">
+<div
+	class="mx-auto md:min-h-screen mt-7 flex flex-col justify-center items-center px-6 pt-2 pt:mb-10"
+>
 	<div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0 ">
 		<div class="p-6 sm:p-8 lg:p-16 space-y-8">
 			<h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Registrar Entidad</h2>
@@ -128,11 +140,11 @@
 				</div>
 				{#if etiquetas && haystackTags}
 					{#if entidadSeleccionada.tipo === 'equip'}
-						<EquipoForm {etiquetas} {haystackTags}/>
+						<EquipoForm {etiquetas} {haystackTags} />
 					{:else if entidadSeleccionada.tipo === 'site'}
-						<SitioForm {etiquetas} {haystackTags}/>
+						<SitioForm {etiquetas} {haystackTags} />
 					{:else if entidadSeleccionada.tipo === 'point'}
-						<PuntoForm {etiquetas} {haystackTags}/>
+						<PuntoForm {etiquetas} {haystackTags} />
 					{/if}
 				{/if}
 				<div class="text-center lg:text-center">

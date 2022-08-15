@@ -3,7 +3,6 @@ import { getClient } from '../../clientes/hasura';
 
 export async function post({ request }: any) {
 	const { query, variables }: any = await request.json();
-		console.log(query, variables);
 
 	try {
 		const newClient = getClient(variables?.url);
@@ -11,13 +10,16 @@ export async function post({ request }: any) {
 		
 		const { data, error } = await newClient.mutation(queries[query], variables).toPromise();
 
-		if (error)
+		console.log('🚀 ~ file: mutations-fetcher.ts ~ line 14 ~ post ~ error', JSON.stringify(error));
+		if (error) {
 			return {
 				status: 400,
 				error
 			};
+			
+		}
 
-		return { status: 200, data };
+		return { status: 200, body:data };
 		// return result;
 	} catch (error) {
 		console.log(error);
