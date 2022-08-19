@@ -46,7 +46,7 @@
 	};
 	const getSensorData = async () => {
 		try {
-			const res = await fetch('http://localhost:8081/obtener-datos', requestOptions);
+			const res = await fetch('http://localhost:8082/obtener-datos', requestOptions);
 			const response = await res.json();
 			const formatedResponse = formatResponse(response);
 			return formatedResponse;

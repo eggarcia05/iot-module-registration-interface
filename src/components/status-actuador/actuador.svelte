@@ -27,7 +27,7 @@
 
 	const getEstadoActuador = async () => {
 		try {
-			const res = await fetch('http://localhost:8081/obtener-datos', requestOptions);
+			const res = await fetch('http://localhost:8082/obtener-datos', requestOptions);
 			const response = await res.json();
 			checkedValue = response.result?.[0]?.registro.value === 'on';
 			console.log(checkedValue);
