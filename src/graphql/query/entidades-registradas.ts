@@ -24,6 +24,8 @@ export const point = gql`
 			id
 			dis
 			tags
+			clave_esperada
+			equipRef
 		}
 	}
 `;

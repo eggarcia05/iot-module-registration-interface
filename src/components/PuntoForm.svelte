@@ -87,7 +87,7 @@
 				class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 				for="grid-password"
 			>
-				Etiquetas Disponibles
+				Etiquetas Frecuentes
 			</label>
 			{#if !cont}
 				<p class="text-red-500 text-xs italic">No existen etiquetas disponibles</p>

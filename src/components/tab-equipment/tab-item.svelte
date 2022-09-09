@@ -29,7 +29,9 @@
 			result.push({
 				value: response.id,
 				label: response.dis,
-				tags: response.tags
+				tags: response.tags,
+				clave_esperada: response.clave_esperada,
+				equipRef: response.equipRef
 			});
 		}
 		return result;
@@ -74,7 +76,7 @@
 						<svelte:component
 							this={MyComponent}
 							pointId={selectedPointId.value}
-							timeRefreshData={equip.id !== 'dd85475c-a5ef-4a15-b00f-206e408528b2' ? 5 : undefined}
+							timeRefreshData={equip.id !== 'dd85475c-a5ef-4a15-b00f-206e408528b2' ? 10 : undefined}
 						/>
 					{/if}
 				{/key}
@@ -90,7 +92,7 @@
 					{#if !item.tags.run}
 						<TimeseriesChart
 							pointId={item.value}
-							timeRefreshData={equip.id !== 'dd85475c-a5ef-4a15-b00f-206e408528b2' ? 5 : undefined}
+							timeRefreshData={equip.id !== 'dd85475c-a5ef-4a15-b00f-206e408528b2' ? 10 : undefined}
 						/>
 					{/if}
 				{/each}

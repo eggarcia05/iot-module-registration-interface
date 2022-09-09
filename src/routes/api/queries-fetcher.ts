@@ -15,9 +15,12 @@ export async function post({ request }: any) {
 				body: error
 			};
 
-		return { body: data };
+		return { status: 200, body: data };
 		// return result;
 	} catch (error) {
-		console.log(error);
+		return {
+			status: 400,
+			body: error
+		};
 	}
 }

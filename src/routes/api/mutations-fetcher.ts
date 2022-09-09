@@ -10,7 +10,6 @@ export async function post({ request }: any) {
 		
 		const { data, error } = await newClient.mutation(queries[query], variables).toPromise();
 
-		console.log('🚀 ~ file: mutations-fetcher.ts ~ line 14 ~ post ~ error', JSON.stringify(error));
 		if (error) {
 			return {
 				status: 400,
@@ -22,7 +21,6 @@ export async function post({ request }: any) {
 		return { status: 200, body:data };
 		// return result;
 	} catch (error) {
-		console.log(error);
 		return {
 			status: 400,
 			error

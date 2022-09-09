@@ -17,10 +17,7 @@
 			getEtiquetas();
 		}
 	}
-	$: {
-		console.log($NUEVA_ENTIDAD);
-	}
-
+	
 	const construirNuevaEntidad = async (): Promise<void> => {
 		NUEVA_ENTIDAD.clear();
 	};
@@ -64,13 +61,8 @@
 		$NUEVA_ENTIDAD = deleteNullProperties($NUEVA_ENTIDAD);
 		const query = entidadSeleccionada.tipo;
 		const response = await fetchMutation();
-		console.log('🚀 ', JSON.stringify(response));
 
 		const idGenerado = response?.[`insert_${query}`]?.returning?.[0].id ?? null;
-		console.log(
-			'🚀 ~ file: registrar-modulo.svelte ~ line 69 ~ guardarEntidad ~ idGenerado',
-			idGenerado
-		);
 
 		if (idGenerado) {
 			$NUEVA_ENTIDAD['id'] = idGenerado;

@@ -6,6 +6,7 @@
 
 	export let pointId: string;
 	export let timeRefreshData: number = 45;
+	const apiStandardization = import.meta.env.VITE_API_STANDARDIZATION;
 
 	fcRoot(FusionCharts, Timeseries);
 
@@ -34,19 +35,9 @@
 		redirect: 'follow'
 	};
 
-	const formatResponse = (response: any) => {
-		let data: any = [];
-		captionText = response.result?.[0].point.dis;
-		subCaptionText = response.result?.[0].point.equip.dis;
-		unit = response.result?.[0].registro.unit;
-		for (let rv of response.result) {
-			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
-		}
-		return data;
-	};
 	const getSensorData = async () => {
 		try {
-			const res = await fetch('http://localhost:8082/obtener-datos', requestOptions);
+			const res = await fetch(`${apiStandardization}/obtener-datos`, requestOptions);
 			const response = await res.json();
 			const formatedResponse = formatResponse(response);
 			return formatedResponse;
@@ -55,13 +46,23 @@
 		}
 	};
 
+	const formatResponse = (response: any) => {
+		let data: any = [];
+		captionText = response.response?.[0].point.dis;
+		subCaptionText = response.response?.[0].point.equip.dis;
+		unit = response.response?.[0].registro.unit;
+		for (let rv of response.response) {
+			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
+		}
+		return data;
+	};
 	onMount(() => {
 		// getSensorData();
 	});
 
 	onDestroy(() => {
 		clearInterval(interval);
-		console.log('DEstroy');
+		console.log('DESTROY: ', pointId);
 	});
 
 	const schema = [
@@ -120,15 +121,20 @@
 
 	const updateData = async () => {
 		const updatedSensorData = await getSensorData();
-		if (!!chartComponent?.feedData) chartComponent.feedData([...updatedSensorData]);
+		console.log('GET DATA: ', pointId);
+		if (!!chartComponent?.feedData) {
+			console.log('UPDATE CHART: ', pointId);
+			chartComponent.feedData([...updatedSensorData]);
+		}
 
 		// setTimeout(updateData, timeRefreshData * 1000);
 	};
 
 	const renderCompleteHandler = async (event: any) => {
-		
-		if(!interval){
-			console.log(chartComponent?.feedData);
+		console.log(!interval);
+
+		if (!interval) {
+			console.log('INICIAR INTERVALO: ', pointId, 'tiempo: ', timeRefreshData);
 
 			interval = setInterval(async () => await updateData(), timeRefreshData * 1000);
 		}
