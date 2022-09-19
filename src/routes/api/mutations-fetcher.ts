@@ -9,6 +9,8 @@ export async function post({ request }: any) {
 		delete variables.url;
 		
 		const { data, error } = await newClient.mutation(queries[query], variables).toPromise();
+		console.log("🚀 ~ file: mutations-fetcher.ts ~ line 12 ~ post ~ data", data)
+		console.log("🚀 ~ file: mutations-fetcher.ts ~ line 12 ~ post ~ error", error)
 
 		if (error) {
 			return {

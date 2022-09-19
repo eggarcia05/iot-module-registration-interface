@@ -17,7 +17,7 @@
 			getEtiquetas();
 		}
 	}
-	
+
 	const construirNuevaEntidad = async (): Promise<void> => {
 		NUEVA_ENTIDAD.clear();
 	};
@@ -61,7 +61,6 @@
 		$NUEVA_ENTIDAD = deleteNullProperties($NUEVA_ENTIDAD);
 		const query = entidadSeleccionada.tipo;
 		const response = await fetchMutation();
-
 		const idGenerado = response?.[`insert_${query}`]?.returning?.[0].id ?? null;
 
 		if (idGenerado) {

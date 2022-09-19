@@ -7,6 +7,9 @@ export const site = gql`
 			on_conflict: { constraint: site_pk, update_columns: [dis, tags, updated_at] }
 		) {
 			affected_rows
+			returning{
+				id
+			}
 		}
 	}
 `;
@@ -18,6 +21,9 @@ export const equip = gql`
 			on_conflict: { constraint: equip_pk, update_columns: [dis, tags, siteRef, updated_at] }
 		) {
 			affected_rows
+			returning {
+				id
+			}
 		}
 	}
 `;
