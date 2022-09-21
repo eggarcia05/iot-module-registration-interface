@@ -1,5 +1,5 @@
 <script lang="ts">
-	export const prerender = false;
+	// export const prerender = true;
 
 	import Select from 'svelte-select';
 	import { buildRequest } from '../utils/helper-functions';

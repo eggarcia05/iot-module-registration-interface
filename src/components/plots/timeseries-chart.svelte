@@ -1,14 +1,12 @@
 <script lang="ts">
-	import FusionCharts from 'fusioncharts';
-	import Timeseries from 'fusioncharts/fusioncharts.timeseries';
+	// export const prerender = true;
+
 	import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
 	import { onMount, onDestroy } from 'svelte';
 
 	export let pointId: string;
 	export let timeRefreshData: number = 45;
 	const apiStandardization = import.meta.env.VITE_API_STANDARDIZATION;
-
-	fcRoot(FusionCharts, Timeseries);
 
 	$: pointId;
 
@@ -25,7 +23,7 @@
 		filtroPorEtiquetas: {
 			etiquetas: []
 		},
-		limite: 2000
+		limite: 1000
 	});
 
 	const requestOptions: any = {
@@ -56,8 +54,14 @@
 		}
 		return data;
 	};
-	onMount(() => {
+
+	let FusionCharts: any;
+	let Timeseries: any;
+	onMount(async () => {
 		// getSensorData();
+		Timeseries = await import('fusioncharts/fusioncharts.timeseries');
+		FusionCharts = await import('fusioncharts');
+		fcRoot(FusionCharts.default, Timeseries.default);
 	});
 
 	onDestroy(() => {
@@ -142,15 +146,17 @@
 </script>
 
 <div id="chart-container" class="sm:max-w-screen">
-	{#await getSensorData()}
-		<p>Obteniendo datos y esquema...</p>
-	{:then value}
-		<SvelteFC
-			{...getChartConfig(value)}
-			on:renderComplete={renderCompleteHandler}
-			bind:chart={chartComponent}
-		/>
-	{:catch error}
-		<p>Something went wrong: {error.message}</p>
-	{/await}
+	{#if !!FusionCharts}
+		{#await getSensorData()}
+			<p>Obteniendo datos y esquema...</p>
+		{:then value}
+			<SvelteFC
+				{...getChartConfig(value)}
+				on:renderComplete={renderCompleteHandler}
+				bind:chart={chartComponent}
+			/>
+		{:catch error}
+			<p>Something went wrong: {error.message}</p>
+		{/await}
+	{/if}
 </div>
