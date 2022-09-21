@@ -34,4 +34,4 @@ RUN npm audit fix
 # COPY --from=0 /app/build ./
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+CMD ["node", "./build/index.js"]
