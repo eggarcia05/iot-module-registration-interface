@@ -23,7 +23,7 @@
 		filtroPorEtiquetas: {
 			etiquetas: []
 		},
-		limite: 1000
+		limite: 2000
 	});
 
 	const requestOptions: any = {
