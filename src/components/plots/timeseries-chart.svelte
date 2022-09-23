@@ -45,11 +45,14 @@
 	};
 
 	const formatResponse = (response: any) => {
+		if (response.response.length === 0) return [];
 		let data: any = [];
-		captionText = response.response?.[0].point.dis;
-		subCaptionText = response.response?.[0].point.equip.dis;
-		unit = response.response?.[0].registro.unit;
-		for (let rv of response.response) {
+
+		captionText = response?.response?.[0].point?.dis ?? '';
+		subCaptionText = response?.response?.[0].point?.equip.dis ?? '';
+		unit = response?.response?.[0].registro?.unit ?? '';
+	
+		for (let rv of response?.response ?? []) {
 			data = [...data, [rv.timestamp_registro.split('.')[0], rv.registro.value]];
 		}
 		return data;
@@ -150,11 +153,15 @@
 		{#await getSensorData()}
 			<p>Obteniendo datos y esquema...</p>
 		{:then value}
-			<SvelteFC
-				{...getChartConfig(value)}
-				on:renderComplete={renderCompleteHandler}
-				bind:chart={chartComponent}
-			/>
+			{#if value.length > 0}
+				<SvelteFC
+					{...getChartConfig(value)}
+					on:renderComplete={renderCompleteHandler}
+					bind:chart={chartComponent}
+				/>
+			{:else}
+				<div class= "w-full flex justify-center font-semibold m-10">SIN DATOS QUE MOSTRAR</div>
+			{/if}
 		{:catch error}
 			<p>Something went wrong: {error.message}</p>
 		{/await}

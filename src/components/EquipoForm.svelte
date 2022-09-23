@@ -100,7 +100,7 @@
 	/>
 	<CheckboxList
 		data={hayStackFiltrado && texto ? hayStackFiltrado : haystackTags}
-		on:new_tag={() => alert('ok')}
+		
 	/>
 </div>
 
