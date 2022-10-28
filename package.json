@@ -2,7 +2,7 @@
 	"name": "register-modules-system",
 	"version": "0.0.1",
 	"scripts": {
-		"start": "svelte-kit dev --host --port 3000",
+		"start": "svelte-kit dev --host --port 30005",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -37,6 +37,7 @@
 		"svelte-fusioncharts": "^1.0.0",
 		"svelte-select": "^4.4.7",
 		"svelte-switch": "^0.0.5",
+		"svelte-table": "^0.5.1",
 		"svelte-tabs": "^1.1.0"
 	},
 	"type": "module"
