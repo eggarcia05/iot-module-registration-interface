@@ -34,11 +34,16 @@
 	};
 
 	const getPoints = async (): Promise<any> => {
+		try {
 		const res = await fetch(`/api/queries-fetcher`, buildRequest('point'));
 		const response = await res.json();
 
 		items = formatPoints(response?.point);
-	};
+
+		} catch (error) {
+			
+		}
+	}
 
 	function handleSelect(event: any) {
 		selectedPointId = event.detail.value;
