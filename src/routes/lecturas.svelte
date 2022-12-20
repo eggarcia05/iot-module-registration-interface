@@ -5,7 +5,7 @@
     // tailwinds
 </script>
 
-<div class="mt-16">
+<div class="mt-24">
     <div class=""> 
 
         {" SI de desea ver los datos haga clic "}
