@@ -69,7 +69,7 @@
 	];
 </script>
 
-<div class="mt-16">
+<div class="mt-24">
 	<div class="row">
 		<SvelteTable columns={columns} rows={rows} rowKey="dis">
 			<!-- <svelte:fragment slot="expanded" let:row>{row.detail}</svelte:fragment> -->

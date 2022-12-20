@@ -250,7 +250,7 @@ const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       value: (v) => v.value
     }
   ];
-  return `<div class="${"mt-16"}"><div class="${"row"}">${validate_component(SvelteTable, "SvelteTable").$$render($$result, { columns, rows, rowKey: "dis" }, {}, {})}</div>
+  return `<div class="${"mt-24"}"><div class="${"row"}">${validate_component(SvelteTable, "SvelteTable").$$render($$result, { columns, rows, rowKey: "dis" }, {}, {})}</div>
 </div>`;
 });
 export { Tabla as default };
