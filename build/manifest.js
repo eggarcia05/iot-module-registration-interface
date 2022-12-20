@@ -3,14 +3,15 @@ export const manifest = {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		entry: {"file":"start-a1f6dc11.js","js":["start-a1f6dc11.js","chunks/index-e5139cc1.js","chunks/index-865412c6.js","chunks/preload-helper-60cab3ee.js"],"css":[]},
+		entry: {"file":"start-58ba0474.js","js":["start-58ba0474.js","chunks/index-e5139cc1.js","chunks/index-865412c6.js","chunks/preload-helper-60cab3ee.js"],"css":[]},
 		nodes: [
 			() => import('./server/nodes/0.js'),
 			() => import('./server/nodes/1.js'),
 			() => import('./server/nodes/3.js'),
 			() => import('./server/nodes/2.js'),
 			() => import('./server/nodes/4.js'),
-			() => import('./server/nodes/5.js')
+			() => import('./server/nodes/5.js'),
+			() => import('./server/nodes/6.js')
 		],
 		routes: [
 			{
@@ -37,13 +38,24 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "lecturas",
+				pattern: /^\/lecturas\/?$/,
+				names: [],
+				types: [],
+				path: "/lecturas",
+				shadow: null,
+				a: [0,4],
+				b: [1]
+			},
+			{
+				type: 'page',
 				id: "registrar-modulo",
 				pattern: /^\/registrar-modulo\/?$/,
 				names: [],
 				types: [],
 				path: "/registrar-modulo",
 				shadow: null,
-				a: [0,4],
+				a: [0,5],
 				b: [1]
 			},
 			{
@@ -54,7 +66,7 @@ export const manifest = {
 				types: [],
 				path: "/tabla",
 				shadow: null,
-				a: [0,5],
+				a: [0,6],
 				b: [1]
 			},
 			{
