@@ -8,7 +8,8 @@
 <div class="mt-24">
     <div class=""> 
 
-        {" SI de desea ver los datos haga clic "}
+        {"Portal de datos abiertos públicos. Información de estaciones meterológicas"}
+        {"Si de desea ver los datos haga clic "}
     </div>
  <a href="/tabla" class=" "> aqui</a>
 </div>

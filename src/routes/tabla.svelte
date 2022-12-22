@@ -32,7 +32,7 @@
 		rows = response.map((item) => {
 			return item.registro;
 		});
-		console.log(rows)
+		//console.log(rows)
 	};
 	convertResponseFormat();
 	
@@ -42,40 +42,34 @@
 			key: "dis",
 			title: 'Parametro',
 			value: (v: any) => v["dis"],
+			class: 'col border-t border-b border-l border-r border-gray-900',
 			sortable: true,
-			// filterOptions: (rows) => {
-			// 	// generate groupings of 0-10, 10-20 etc...
-			// 	let nums = {};
-			// 	rows.forEach((row) => {
-			// 		let num = Math.floor(row["Nudos"] / 10);
-			// 		if (nums[num] === undefined)
-			// 			nums[num] = { name: `${num * 10} to ${(num + 1) * 10}`, value: num };
-			// 	});
-			// 	// fix order
-			// 	nums = Object.entries(nums)
-			// 		.sort()
-			// 		.reduce((o, [k, v]) => ((o[k] = v), o), {});
-			// 	return Object.values(nums);
-			// },
-			// filterValue: (v) => Math.floor(v["dis"] / 10),
-			headerClass: 'text-left'
+			headerClass: 'text-left border-t border-b border-l border-r border-gray-900'
 		},
 		{
 			key: "value",
 			title: "Valor",
-			value: (v: any) => v.value
+			value: (v: any) => v.value,
+			class: 'row border-t border-b border-l border-r border-gray-900',
+			sortable: true,
+			headerClass: 'text-left border-t border-b border-l border-r border-gray-900'
 		}
 		
 	];
 </script>
 
 <div class="mt-24">
-	<div class="row">
-		<SvelteTable columns={columns} rows={rows} rowKey="dis">
-			<!-- <svelte:fragment slot="expanded" let:row>{row.detail}</svelte:fragment> -->
+	<div class="row text-justify">
+		<SvelteTable
+		columns={columns} 
+		rows={rows} 
+		rowKey="dis"
+		>
 		</SvelteTable>
+		
 	</div>
 </div>
 
 <style>
+	
 </style>
