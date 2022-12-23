@@ -15,7 +15,7 @@
     "src": "src/routes/api/queries-fetcher.ts",
     "isEntry": true,
     "imports": [
-      "_hasura-ab749352.js"
+      "_hasura-dffc9e7b.js"
     ]
   },
   "src/routes/api/mutations-fetcher.ts": {
@@ -23,7 +23,7 @@
     "src": "src/routes/api/mutations-fetcher.ts",
     "isEntry": true,
     "imports": [
-      "_hasura-ab749352.js"
+      "_hasura-dffc9e7b.js"
     ]
   },
   "src/routes/__layout.svelte": {
@@ -105,8 +105,8 @@
   "_index-55d7da86.js": {
     "file": "chunks/index-55d7da86.js"
   },
-  "_hasura-ab749352.js": {
-    "file": "chunks/hasura-ab749352.js"
+  "_hasura-dffc9e7b.js": {
+    "file": "chunks/hasura-dffc9e7b.js"
   },
   "_index-0e127ed7.js": {
     "file": "chunks/index-0e127ed7.js",

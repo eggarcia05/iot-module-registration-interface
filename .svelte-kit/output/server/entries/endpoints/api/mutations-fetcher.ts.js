@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import { g as getClient } from "../../../chunks/hasura-ab749352.js";
+import { g as getClient } from "../../../chunks/hasura-dffc9e7b.js";
 const site = gql`
 	mutation nuevaEntidad($object: [site_insert_input!] = {}) {
 		insert_site(
