@@ -40,7 +40,7 @@
 	const columns: any = [
 		{
 			key: "dis",
-			title: 'Parametro',
+			title: 'Parámetro',
 			value: (v: any) => v["dis"],
 			class: 'col border-t border-b border-l border-r border-gray-900',
 			sortable: true,
