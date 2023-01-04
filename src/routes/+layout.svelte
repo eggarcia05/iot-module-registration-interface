@@ -1,10 +1,12 @@
-<script module="context" , lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+<script module="context" lang="ts">
+	// throw new Error(
+	// 	'@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)'
+	// );
 
 	export const ssr = false;
 	import '../app.css';
 	import LogIn from '../components/LogIn.svelte';
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 	import { user } from '../stores/user-session';
 	import Navbar from '../components/navbar.svelte';
 </script>

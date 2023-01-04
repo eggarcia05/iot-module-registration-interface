@@ -1,19 +1,23 @@
 export { matchers } from './client-matchers.js';
 
-export const components = [
-	() => import("..\\..\\src\\routes\\__layout.svelte"),
-	() => import("..\\runtime\\components\\error.svelte"),
-	() => import("..\\..\\src\\routes\\dashboard.svelte"),
-	() => import("..\\..\\src\\routes\\index.svelte"),
-	() => import("..\\..\\src\\routes\\lecturas.svelte"),
-	() => import("..\\..\\src\\routes\\registrar-modulo.svelte"),
-	() => import("..\\..\\src\\routes\\tabla.svelte")
-];
+export const nodes = [() => import('./nodes/0'),
+	() => import('./nodes/1'),
+	() => import('./nodes/2'),
+	() => import('./nodes/3'),
+	() => import('./nodes/4'),
+	() => import('./nodes/5'),
+	() => import('./nodes/6')];
+
+export const server_loads = [];
 
 export const dictionary = {
-	"": [[0, 3], [1]],
-	"dashboard": [[0, 2], [1]],
-	"lecturas": [[0, 4], [1]],
-	"registrar-modulo": [[0, 5], [1]],
-	"tabla": [[0, 6], [1]]
+	"/": [2],
+	"/dashboard": [3],
+	"/lecturas": [4],
+	"/registro": [5],
+	"/tabla": [6]
+};
+
+export const hooks = {
+	handleError: (({ error }) => { console.error(error) }),
 };

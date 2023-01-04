@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { queries } from '../../../graphql/mutations';
 import { getClient } from '../../../clientes/hasura';
 
@@ -18,10 +18,10 @@ export async function POST({ request }: any) {
 			
 		}
 
-		throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
+		// throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
 		// Suggestion (check for correctness before using):
 		// return json$1(data);
-		return { status: 200, body:data };
+		return json({ status: 200, body: data });
 		// return result;
 	} catch (error) {
 		return new Response(undefined, { status: 400 });

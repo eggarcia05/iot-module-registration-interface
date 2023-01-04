@@ -1,89 +1,68 @@
 export const manifest = {
 	appDir: "_app",
+	appPath: "_app",
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		entry: {"file":"start-a0283392.js","js":["start-a0283392.js","chunks/index-e5139cc1.js","chunks/index-865412c6.js","chunks/preload-helper-60cab3ee.js"],"css":[]},
+		entry: {"file":"_app/immutable/start-5c132fbb.js","imports":["_app/immutable/start-5c132fbb.js","_app/immutable/chunks/index-e617e44f.js","_app/immutable/chunks/singletons-e12e11b3.js","_app/immutable/chunks/index-0bf367c3.js","_app/immutable/chunks/preload-helper-41c905a7.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
-			() => import('./nodes/3.js'),
 			() => import('./nodes/2.js'),
+			() => import('./nodes/3.js'),
 			() => import('./nodes/4.js'),
 			() => import('./nodes/5.js'),
 			() => import('./nodes/6.js')
 		],
 		routes: [
 			{
-				type: 'page',
-				id: "",
+				id: "/",
 				pattern: /^\/$/,
-				names: [],
-				types: [],
-				path: "/",
-				shadow: null,
-				a: [0,2],
-				b: [1]
+				params: [],
+				page: { layouts: [0], errors: [1], leaf: 2 },
+				endpoint: null
 			},
 			{
-				type: 'page',
-				id: "dashboard",
-				pattern: /^\/dashboard\/?$/,
-				names: [],
-				types: [],
-				path: "/dashboard",
-				shadow: null,
-				a: [0,3],
-				b: [1]
-			},
-			{
-				type: 'page',
-				id: "lecturas",
-				pattern: /^\/lecturas\/?$/,
-				names: [],
-				types: [],
-				path: "/lecturas",
-				shadow: null,
-				a: [0,4],
-				b: [1]
-			},
-			{
-				type: 'page',
-				id: "registrar-modulo",
-				pattern: /^\/registrar-modulo\/?$/,
-				names: [],
-				types: [],
-				path: "/registrar-modulo",
-				shadow: null,
-				a: [0,5],
-				b: [1]
-			},
-			{
-				type: 'page',
-				id: "tabla",
-				pattern: /^\/tabla\/?$/,
-				names: [],
-				types: [],
-				path: "/tabla",
-				shadow: null,
-				a: [0,6],
-				b: [1]
-			},
-			{
-				type: 'endpoint',
-				id: "api/queries-fetcher",
-				pattern: /^\/api\/queries-fetcher\/?$/,
-				names: [],
-				types: [],
-				load: () => import('./entries/endpoints/api/queries-fetcher.ts.js')
-			},
-			{
-				type: 'endpoint',
-				id: "api/mutations-fetcher",
+				id: "/api/mutations-fetcher",
 				pattern: /^\/api\/mutations-fetcher\/?$/,
-				names: [],
-				types: [],
-				load: () => import('./entries/endpoints/api/mutations-fetcher.ts.js')
+				params: [],
+				page: null,
+				endpoint: () => import('./entries/endpoints/api/mutations-fetcher/_server.ts.js')
+			},
+			{
+				id: "/api/queries-fetcher",
+				pattern: /^\/api\/queries-fetcher\/?$/,
+				params: [],
+				page: null,
+				endpoint: () => import('./entries/endpoints/api/queries-fetcher/_server.ts.js')
+			},
+			{
+				id: "/dashboard",
+				pattern: /^\/dashboard\/?$/,
+				params: [],
+				page: { layouts: [0], errors: [1], leaf: 3 },
+				endpoint: null
+			},
+			{
+				id: "/lecturas",
+				pattern: /^\/lecturas\/?$/,
+				params: [],
+				page: { layouts: [0], errors: [1], leaf: 4 },
+				endpoint: null
+			},
+			{
+				id: "/registrar-modulo",
+				pattern: /^\/registrar-modulo\/?$/,
+				params: [],
+				page: { layouts: [0], errors: [1], leaf: 5 },
+				endpoint: null
+			},
+			{
+				id: "/tabla",
+				pattern: /^\/tabla\/?$/,
+				params: [],
+				page: { layouts: [0], errors: [1], leaf: 6 },
+				endpoint: null
 			}
 		],
 		matchers: async () => {

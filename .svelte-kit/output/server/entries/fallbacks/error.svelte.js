@@ -1,21 +1,29 @@
-import { c as create_ssr_component, e as escape } from "../../chunks/index-55d7da86.js";
-function load({ error, status }) {
-  return { props: { error, status } };
-}
-const Error = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { status } = $$props;
-  let { error } = $$props;
-  if ($$props.status === void 0 && $$bindings.status && status !== void 0)
-    $$bindings.status(status);
-  if ($$props.error === void 0 && $$bindings.error && error !== void 0)
-    $$bindings.error(error);
-  return `<h1>${escape(status)}</h1>
-
-<pre>${escape(error.message)}</pre>
-
-
-
-${error.frame ? `<pre>${escape(error.frame)}</pre>` : ``}
-${error.stack ? `<pre>${escape(error.stack)}</pre>` : ``}`;
+import { g as getContext, c as create_ssr_component, b as subscribe, e as escape } from "../../chunks/index.js";
+const getStores = () => {
+  const stores = getContext("__svelte__");
+  return {
+    page: {
+      subscribe: stores.page.subscribe
+    },
+    navigating: {
+      subscribe: stores.navigating.subscribe
+    },
+    updated: stores.updated
+  };
+};
+const page = {
+  subscribe(fn) {
+    const store = getStores().page;
+    return store.subscribe(fn);
+  }
+};
+const Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $page, $$unsubscribe_page;
+  $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  $$unsubscribe_page();
+  return `<h1>${escape($page.status)}</h1>
+<p>${escape($page.error?.message)}</p>`;
 });
-export { Error as default, load };
+export {
+  Error$1 as default
+};
