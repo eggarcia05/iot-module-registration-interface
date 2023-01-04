@@ -1,16 +1,18 @@
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	// export const prerender = true;
 
 	import Select from 'svelte-select';
-	import { buildRequest } from '../utils/helper-functions';
+	import { buildRequest } from '../../utils/helper-functions';
 	// import TestPlot from '../components/plots/test-plot.svelte';
 	import { onMount } from 'svelte';
-	import Tab from '../components/tab-equipment/tabs-container.svelte';
+	import Tab from '../../components/tab-equipment/tabs-container.svelte';
 
 	let MyComponent: any;
 
 	onMount(async () => {
-		const module = await import('../components/plots/timeseries-chart.svelte');
+		const module = await import('../../components/plots/timeseries-chart.svelte');
 		MyComponent = module.default;
 	});
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import EquipoForm from '../components/EquipoForm.svelte';
-	import PuntoForm from '../components/PuntoForm.svelte';
-	import SitioForm from '../components/SitioForm.svelte';
-	import { buildRequest, deleteNullProperties } from '../utils/helper-functions';
-	import { NUEVA_ENTIDAD } from '../stores/nueva-entidad';
+	import EquipoForm from '../../components/EquipoForm.svelte';
+	import PuntoForm from '../../components/PuntoForm.svelte';
+	import SitioForm from '../../components/SitioForm.svelte';
+	import { buildRequest, deleteNullProperties } from '../../utils/helper-functions';
+	import { NUEVA_ENTIDAD } from '../../stores/nueva-entidad';
 
 	let entidadSeleccionada: Entidad;
 	let etiquetas: Etiqueta[] | null;
