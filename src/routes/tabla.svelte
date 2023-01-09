@@ -2,6 +2,8 @@
     // @ts-nocheck
 	import SvelteTable from 'svelte-table';
 
+	const apiStandardization = import.meta.env.VITE_API_STANDARDIZATION;
+
 	var myHeaders = new Headers();
 	myHeaders.append('Content-Type', 'application/json');
 
@@ -26,7 +28,7 @@
 	$:rows
 	
 	const convertResponseFormat = async() => {
-		const data = await fetch("http://localhost:8082/v1/obtener-datos", requestOptions);
+		const data = await fetch(`${apiStandardization}/v1/obtener-datos`, requestOptions);
 		const res = await data.json();
 		const response  = res.response
 		rows = response.map((item) => {

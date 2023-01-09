@@ -17,8 +17,8 @@ const Lecturas = create_ssr_component(($$result, $$props, $$bindings, slots) => 
 
     <p>Siguenos en nuestras redes</p>
     
-    <li class="${"socialMedias svelte-ce9av"}"><a href="${"https://www.instagram.com/espol1/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"instagram svelte-ce9av"}" alt="${"ig"}" src="${"/images/instagram.png"}"></a>
-        <a href="${"https://www.twitter.com/espol/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"twitter svelte-ce9av"}" alt="${"tw"}" src="${"/images/twitter.png"}"></a></li>
+    <li class="${"socialMedias svelte-ce9av"}"><a href="${"https://www.instagram.com/espol1/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"instagram svelte-ce9av"}" alt="${"ig"}" src="${"/src/static/instagram.png"}"></a>
+        <a href="${"https://www.twitter.com/espol/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"twitter svelte-ce9av"}" alt="${"tw"}" src="${"/src/static/twitter.png"}"></a></li>
 </footer>`;
 });
 export { Lecturas as default };

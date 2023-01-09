@@ -29,8 +29,8 @@
     <p>Siguenos en nuestras redes</p>
     
     <li class="socialMedias">
-        <a href="https://www.instagram.com/espol1/" target="_blank"><img class="instagram" alt="ig" src="/images/instagram.png"/></a>
-        <a href="https://www.twitter.com/espol/" target="_blank"><img class="twitter" alt="tw" src="/images/twitter.png" /></a>
+        <a href="https://www.instagram.com/espol1/" target="_blank"><img class="instagram" alt="ig" src="/src/static/instagram.png"/></a>
+        <a href="https://www.twitter.com/espol/" target="_blank"><img class="twitter" alt="tw" src="/src/static/twitter.png" /></a>
     </li>
 </footer>
  

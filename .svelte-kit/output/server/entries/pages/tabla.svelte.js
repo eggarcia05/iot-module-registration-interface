@@ -212,6 +212,7 @@ const SvelteTable = create_ssr_component(($$result, $$props, $$bindings, slots) 
 </table>`;
 });
 const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  const apiStandardization = "http://200.126.13.221:8082/v1";
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const raw = JSON.stringify({
@@ -227,7 +228,7 @@ const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   };
   let rows = [];
   const convertResponseFormat = async () => {
-    const data = await fetch("http://localhost:8082/v1/obtener-datos", requestOptions);
+    const data = await fetch(`${apiStandardization}/v1/obtener-datos`, requestOptions);
     const res = await data.json();
     const response = res.response;
     rows = response.map((item) => {
