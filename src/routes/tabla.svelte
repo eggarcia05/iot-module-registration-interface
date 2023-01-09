@@ -28,7 +28,7 @@
 	$:rows
 	
 	const convertResponseFormat = async() => {
-		const data = await fetch(`${apiStandardization}/v1/obtener-datos`, requestOptions);
+		const data = await fetch(`${apiStandardization}/obtener-datos`, requestOptions);
 		const res = await data.json();
 		const response  = res.response
 		rows = response.map((item) => {
