@@ -1030,7 +1030,7 @@ const css = {
 };
 const Actuador = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { point } = $$props;
-  const apiStandardization = "http://localhost:8082/v1";
+  const apiStandardization = "http://200.126.13.221:8082/v1";
   let checkedValue;
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");

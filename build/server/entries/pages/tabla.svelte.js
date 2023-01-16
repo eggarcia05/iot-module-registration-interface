@@ -219,7 +219,7 @@ const css = {
 let src = "http://www.cenaim.espol.edu.ec/sites/cenaim.espol.edu.ec/files/2020/Imagenes/CENAIM-2.jpg";
 const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let rows = [];
-  const apiStandardization = "http://localhost:8082/v1";
+  const apiStandardization = "http://200.126.13.221:8082/v1";
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const raw = JSON.stringify({
