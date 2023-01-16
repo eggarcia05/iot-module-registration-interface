@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import { g as getClient } from "../../../chunks/hasura-dffc9e7b.js";
+import { g as getClient } from "../../../chunks/hasura-9afb62e8.js";
 const entidades = gql`
 	query entidades {
 		entidades {

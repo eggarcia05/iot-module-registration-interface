@@ -9,16 +9,15 @@ const Lecturas = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   $$result.css.add(css);
   return `<div class="${"espolsquare svelte-ce9av"}"><div class="${"imagen svelte-ce9av"}"><img class="${"foto svelte-ce9av"}"${add_attribute("src", src, 0)} alt="${"ESPOL"}"></div></div>
 <div class="${"text svelte-ce9av"}"><h1><b>Portal de datos abiertos p\xFAblicos. Informaci\xF3n acerca de variables meterolog\xF3cias medidas por las siguientes estaciones ubicadas en ESPOL:</b></h1>
-        <ul><li class="${"estaciones svelte-ce9av"}">Estaci\xF3n CENAIM</li>
-            <li class="${"estaciones svelte-ce9av"}">Estaci\xF3n GEA</li></ul>
-        <h1><b>Si de desea ver los datos haga clic <i><a class="${"vinculo svelte-ce9av"}" href="${"/tabla"}" target="${"_blank"}">aqui</a></i></b></h1></div>
+        <ul><li class="${"estaciones svelte-ce9av"}">Estaci\xF3n CENAIM. Para ver los datos haga clic <i><a class="${"vinculo svelte-ce9av"}" href="${"/tabla"}" target="${"_blank"}">aqui</a></i></li>
+            <li class="${"estaciones svelte-ce9av"}">Estaci\xF3n GEA</li></ul></div>
 
 <footer class="${"footer svelte-ce9av"}"><p>\xA9 Escuela Superior Polit\xE9cnica del Litoral - 2022 \xA9</p>
 
     <p>Siguenos en nuestras redes</p>
     
-    <li class="${"socialMedias svelte-ce9av"}"><a href="${"https://www.instagram.com/espol1/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"instagram svelte-ce9av"}" alt="${"ig"}" src="${"https://espolec-my.sharepoint.com/:i:/g/personal/frjaparr_espol_edu_ec/EehlWQ9CPzdHuOJrSXP7e5oBeXJYCrw5NLcMXEdp1-tj4g?e=60haBy"}"></a>
-        <a href="${"https://www.twitter.com/espol/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"twitter svelte-ce9av"}" alt="${"tw"}" src="${"https://espolec-my.sharepoint.com/:i:/g/personal/frjaparr_espol_edu_ec/ESJ4yA7UmK1Cqb-cz5q7Fu8BAPd829_jQ6SICbXYrMAhTw?e=kdgEng"}"></a></li>
+    <li class="${"socialMedias svelte-ce9av"}"><a href="${"https://www.instagram.com/espol1/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"instagram svelte-ce9av"}" alt="${"ig"}" src="${"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1200px-Instagram-Icon.png"}"></a>
+        <a href="${"https://www.twitter.com/espol/"}" target="${"_blank"}" class="${"svelte-ce9av"}"><img class="${"twitter svelte-ce9av"}" alt="${"tw"}" src="${"https://help.twitter.com/content/dam/help-twitter/brand/logo.png"}"></a></li>
 </footer>`;
 });
 export { Lecturas as default };

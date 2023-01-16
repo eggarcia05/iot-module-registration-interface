@@ -17,10 +17,10 @@
 <div class="text">
     <h1><b>Portal de datos abiertos públicos. Información acerca de variables meterologócias medidas por las siguientes estaciones ubicadas en ESPOL:</b></h1>
         <ul>
-            <li class="estaciones">Estación CENAIM</li>
+            <li class="estaciones">Estación CENAIM. Para ver los datos haga clic <i><a class="vinculo" href="/tabla" target="_blank"> aqui</a></i></li>
             <li class="estaciones">Estación GEA</li>
         </ul>
-        <h1><b>Si de desea ver los datos haga clic <i><a class="vinculo" href="/tabla" target="_blank"> aqui</a></i></b></h1>
+        
 </div>
 
 <footer class="footer">
@@ -29,8 +29,8 @@
     <p>Siguenos en nuestras redes</p>
     
     <li class="socialMedias">
-        <a href="https://www.instagram.com/espol1/" target="_blank"><img class="instagram" alt="ig" src="https://espolec-my.sharepoint.com/:i:/g/personal/frjaparr_espol_edu_ec/EehlWQ9CPzdHuOJrSXP7e5oBeXJYCrw5NLcMXEdp1-tj4g?e=60haBy"/></a>
-        <a href="https://www.twitter.com/espol/" target="_blank"><img class="twitter" alt="tw" src="https://espolec-my.sharepoint.com/:i:/g/personal/frjaparr_espol_edu_ec/ESJ4yA7UmK1Cqb-cz5q7Fu8BAPd829_jQ6SICbXYrMAhTw?e=kdgEng" /></a>
+        <a href="https://www.instagram.com/espol1/" target="_blank"><img class="instagram" alt="ig" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1200px-Instagram-Icon.png"/></a>
+        <a href="https://www.twitter.com/espol/" target="_blank"><img class="twitter" alt="tw" src="https://help.twitter.com/content/dam/help-twitter/brand/logo.png" /></a>
     </li>
 </footer>
  

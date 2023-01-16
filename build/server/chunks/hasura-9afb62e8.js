@@ -1,5 +1,5 @@
 import { createClient, dedupExchange, cacheExchange, fetchExchange } from "@urql/core";
-const urlT = "http://200.126.13.221:8080/v1/graphql";
+const urlT = "http://localhost:8080/v1/graphql";
 const secret = "perc";
 const getClient = (url = urlT) => {
   const gqlClient = createClient({

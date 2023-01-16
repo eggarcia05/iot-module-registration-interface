@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-0898d2a3.js",
+    "file": "start-0e20650d.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -19,7 +19,7 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-906f654b.js",
+    "file": "pages/__layout.svelte-ffb26072.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -28,7 +28,7 @@
       "_index-865412c6.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-f2d4d297.css"
+      "assets/pages/__layout.svelte-87316b47.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -41,7 +41,7 @@
     ]
   },
   "src/routes/dashboard.svelte": {
-    "file": "pages/dashboard.svelte-2369be8b.js",
+    "file": "pages/dashboard.svelte-8d8c9181.js",
     "src": "src/routes/dashboard.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -69,7 +69,7 @@
     ]
   },
   "src/routes/lecturas.svelte": {
-    "file": "pages/lecturas.svelte-ec943ddd.js",
+    "file": "pages/lecturas.svelte-77055070.js",
     "src": "src/routes/lecturas.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -96,7 +96,7 @@
     ]
   },
   "src/routes/tabla.svelte": {
-    "file": "pages/tabla.svelte-1c42ec5d.js",
+    "file": "pages/tabla.svelte-0c4243a9.js",
     "src": "src/routes/tabla.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -104,6 +104,7 @@
       "_index-e5139cc1.js"
     ],
     "css": [
+      "assets/pages/tabla.svelte-4d540480.css",
       "assets/SvelteTable.svelte_svelte_type_style_lang-71faeff2.css"
     ]
   },

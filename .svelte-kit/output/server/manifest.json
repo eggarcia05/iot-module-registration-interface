@@ -15,7 +15,7 @@
     "src": "src/routes/api/queries-fetcher.ts",
     "isEntry": true,
     "imports": [
-      "_hasura-dffc9e7b.js"
+      "_hasura-9afb62e8.js"
     ]
   },
   "src/routes/api/mutations-fetcher.ts": {
@@ -23,7 +23,7 @@
     "src": "src/routes/api/mutations-fetcher.ts",
     "isEntry": true,
     "imports": [
-      "_hasura-dffc9e7b.js"
+      "_hasura-9afb62e8.js"
     ]
   },
   "src/routes/__layout.svelte": {
@@ -35,7 +35,7 @@
       "_index-0e127ed7.js"
     ],
     "css": [
-      "assets/entries/pages/__layout.svelte-26981db8.css"
+      "assets/entries/pages/__layout.svelte-fcecf1fb.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -100,14 +100,15 @@
       "_index-55d7da86.js"
     ],
     "css": [
+      "assets/entries/pages/tabla.svelte-53aa1366.css",
       "assets/SvelteTable.svelte_svelte_type_style_lang-d83be942.css"
     ]
   },
   "_index-55d7da86.js": {
     "file": "chunks/index-55d7da86.js"
   },
-  "_hasura-dffc9e7b.js": {
-    "file": "chunks/hasura-dffc9e7b.js"
+  "_hasura-9afb62e8.js": {
+    "file": "chunks/hasura-9afb62e8.js"
   },
   "_index-0e127ed7.js": {
     "file": "chunks/index-0e127ed7.js",

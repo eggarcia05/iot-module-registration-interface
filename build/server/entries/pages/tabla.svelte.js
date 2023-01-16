@@ -1,6 +1,6 @@
-import { c as create_ssr_component, d as createEventDispatcher, e as escape, q as null_to_empty, g as each, f as add_attribute, v as validate_component, m as missing_component, k as globals } from "../../chunks/index-55d7da86.js";
+import { c as create_ssr_component, d as createEventDispatcher, e as escape, q as null_to_empty, g as each, f as add_attribute, v as validate_component, m as missing_component, k as globals, o as onDestroy } from "../../chunks/index-55d7da86.js";
 /* empty css                                                               */const { Object: Object_1 } = globals;
-const css = {
+const css$1 = {
   code: "table.svelte-1i6qrct.svelte-1i6qrct{width:100%}.isSortable.svelte-1i6qrct.svelte-1i6qrct{cursor:pointer}.isClickable.svelte-1i6qrct.svelte-1i6qrct{cursor:pointer}tr.svelte-1i6qrct th select.svelte-1i6qrct{width:100%}",
   map: null
 };
@@ -127,7 +127,7 @@ const SvelteTable = create_ssr_component(($$result, $$props, $$bindings, slots) 
     $$bindings.classNameExpandedContent(classNameExpandedContent);
   if ($$props.classNameCellExpand === void 0 && $$bindings.classNameCellExpand && classNameCellExpand !== void 0)
     $$bindings.classNameCellExpand(classNameCellExpand);
-  $$result.css.add(css);
+  $$result.css.add(css$1);
   {
     {
       columnByKey = {};
@@ -211,14 +211,21 @@ const SvelteTable = create_ssr_component(($$result, $$props, $$bindings, slots) 
   })}</tbody>
 </table>`;
 });
+var tabla_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => ".imagen.svelte-1fl6mie{margin-top:2%;display:flex;flex-direction:column;align-items:center}.foto.svelte-1fl6mie{height:300px}.cenaimsquare.svelte-1fl6mie{position:absolute;width:100%;left:0;background-color:#b2e3f8;padding:2rem;display:flex;flex-direction:column}.foto_logo.svelte-1fl6mie{height:100px;margin-bottom:3%}.text.svelte-1fl6mie{margin-top:29%;font-family:Georgia, 'Times New Roman', Times, serif}")();
+const css = {
+  code: ".imagen.svelte-1fl6mie{margin-top:2%;display:flex;flex-direction:column;align-items:center}.foto.svelte-1fl6mie{height:300px}.cenaimsquare.svelte-1fl6mie{position:absolute;width:100%;left:0;background-color:#b2e3f8;padding:2rem;display:flex;flex-direction:column}.foto_logo.svelte-1fl6mie{height:100px;margin-bottom:3%}.text.svelte-1fl6mie{margin-top:29%;font-family:Georgia, 'Times New Roman', Times, serif}",
+  map: null
+};
+let src = "http://www.cenaim.espol.edu.ec/sites/cenaim.espol.edu.ec/files/2020/Imagenes/CENAIM-2.jpg";
 const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  const apiStandardization = "http://200.126.13.221:8082/v1";
+  let rows = [];
+  const apiStandardization = "http://localhost:8082/v1";
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const raw = JSON.stringify({
     pointsIds: [],
     filtroPorEtiquetas: { etiquetas: [] },
-    limite: 2e3
+    limite: 200
   });
   const requestOptions = {
     method: "POST",
@@ -226,7 +233,7 @@ const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     body: raw,
     redirect: "follow"
   };
-  let rows = [];
+  let interval;
   const convertResponseFormat = async () => {
     const data = await fetch(`${apiStandardization}/obtener-datos`, requestOptions);
     const res = await data.json();
@@ -254,7 +261,20 @@ const Tabla = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       headerClass: "text-left border-t border-b border-l border-r border-gray-900"
     }
   ];
-  return `<div class="${"mt-24"}"><div class="${"row text-justify"}">${validate_component(SvelteTable, "SvelteTable").$$render($$result, { columns, rows, rowKey: "dis" }, {}, {})}</div>
+  onDestroy(() => {
+    clearInterval(interval);
+  });
+  $$result.css.add(css);
+  return `<div class="${"mt-24"}"><div class="${"logo_cenaim"}"><div class="${"logo"}"><img class="${"foto_logo svelte-1fl6mie"}" src="${"http://www.cenaim.espol.edu.ec/sites/cenaim.espol.edu.ec/files/imagenes/logo_cenaim.png"}" alt="${"CENAIM_logo"}"></div></div>
+	<div class="${"cenaimsquare svelte-1fl6mie"}"><div class="${"imagen svelte-1fl6mie"}"><img class="${"foto svelte-1fl6mie"}"${add_attribute("src", src, 0)} alt="${"CENAIM"}"></div></div>
+	<div class="${"text w-12/12 text-justify svelte-1fl6mie"}"><h1><p>El CENAIM es un centro de investigaci\xF3n marina y acu\xEDcola construido en 1990 por gesti\xF3n de la Escuela Superior Polit\xE9cnica del Litoral (ESPOL) con apoyo financiero del Gobierno de Jap\xF3n. 
+					El CENAIM forma parte integral de la ESPOL, siendo su misi\xF3n el mejoramiento y desarrollo sustentable de la acuicultura y biodiversidad marina del Ecuador a trav\xE9s de la investigaci\xF3n cient\xEDfica, el desarrollo tecnol\xF3gico, la capacitaci\xF3n y la difusi\xF3n.
+					El CENAIM se encuentra localizado San Pedro de Manglaralto, Provincia de Santa Elena. Tiene una infraestructura funcional conformada por laboratorios de an\xE1lisis, salas de experimentaci\xF3n, oficinas, sala de computo, biblioteca, \xE1reas de instrucci\xF3n y recreaci\xF3n, y habitaciones para t\xE9cnicos y estudiantes.
+					Su estaci\xF3n experimental en Palmar, a 10 minutos del CENAIM complementa las investigaciones en campo.</p><br>
+
+			<b>A continuaci\xF3n se muestra informaci\xF3n acerca de las variables medidas por los sensores: </b></h1></div>
+
+	<div class="${"mt-5 row text-justify justify-self-center "}">${validate_component(SvelteTable, "SvelteTable").$$render($$result, { columns, rows, rowKey: "dis" }, {}, {})}</div>
 </div>`;
 });
 export { Tabla as default };
